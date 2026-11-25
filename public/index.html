@@ -2,10 +2,10 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Naillies — Kit de Noël en précommande, livraison avant Noël</title>
   <meta name="description" content="Précommandez le kit de Noël Naillies : le coffret de manucure à domicile, pose américaine amande, avec ou sans capsules. Paiement sécurisé, livraison avant Noël.">
-  <meta name="theme-color" content="#5C0C3A">
+  <meta name="theme-color" content="#1b0812">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="fr_FR">
@@ -21,85 +21,131 @@
   <link rel="preload" href="/fonts/jost-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/products.json" as="fetch" crossorigin>
   <link rel="stylesheet" href="/styles.css">
+  <script src="/boot.js"></script>
   <script src="/app.js" defer></script>
+  <script src="/ui.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#precommande">Aller à la précommande</a>
+  <canvas id="scene" class="scene is-hidden" aria-hidden="true"></canvas>
 
-  <div class="announce">
-    Précommandes ouvertes<span class="sep" aria-hidden="true">·</span>Livraison avant Noël<span id="announce-deadline" hidden></span>
-  </div>
-
-  <header class="site-header">
-    <div class="container">
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
       <a class="logo" href="/" aria-label="Naillies, accueil">
         <span class="logo-n" aria-hidden="true">N<span class="dot"></span></span>
         <span class="logo-word">Naillies</span>
       </a>
       <nav class="nav" aria-label="Navigation principale">
-        <div class="nav-links">
-          <a href="#precommande">Précommande</a>
-          <a href="#contenu">Contenu</a>
-          <a href="#livraison">Livraison</a>
-          <a href="#faq">FAQ</a>
-        </div>
-        <a class="btn btn--sm" href="#precommande">Précommander</a>
+        <a href="#story">Le kit</a>
+        <a href="#contenu">Contenu</a>
+        <a href="#livraison">Livraison</a>
+        <a href="#faq">FAQ</a>
       </nav>
+      <a class="header-cta" href="#precommande">Précommander<span class="header-price" data-from-price></span></a>
     </div>
   </header>
 
   <main>
-    <!-- HERO -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="container hero-grid">
-        <div>
-          <p class="kicker">La collection de Noël</p>
-          <h1 id="hero-title">La manucure de Noël, à&nbsp;domicile<span class="dot" aria-hidden="true"></span></h1>
-          <p class="hero-lead">Un coffret complet pour une pose américaine amande&nbsp;: primer, base, vernis gel, top coat doré, mini-lampe et ponceuse. À précommander dès maintenant, livré avant Noël.</p>
-          <div class="hero-actions">
-            <a class="btn btn--light" href="#precommande">Précommander</a>
-            <a class="link-arrow" href="#contenu">Voir le contenu</a>
+    <!-- ===== HISTOIRE : hero + coffret 3D qui s’ouvre au défilement ===== -->
+    <section class="story" id="story" aria-label="Le kit de Noël Naillies">
+      <div class="story-bg" aria-hidden="true">
+        <div class="story-glow"></div>
+        <div class="story-vignette"></div>
+      </div>
+
+      <div class="story-ui">
+        <div class="hero-copy" id="hero-copy">
+          <div class="hero-top">
+            <p class="chip"><span class="chip-dot" aria-hidden="true"></span>Précommandes ouvertes<span id="announce-deadline" hidden></span></p>
+            <h1 id="hero-title" class="hero-title">
+              <span class="line"><span class="word">La manucure de Noël,</span></span>
+              <span class="line"><span class="word">à&nbsp;domicile<span class="dot" aria-hidden="true"></span></span></span>
+            </h1>
           </div>
-          <ul class="hero-facts" aria-label="Points clés">
-            <li>Livraison avant Noël</li>
-            <li>Paiement sécurisé</li>
-            <li>Formules HEMA &amp; TPO free</li>
-          </ul>
+          <div class="hero-actions">
+            <a class="btn btn--light" href="#precommande" data-magnetic>Précommander</a>
+            <a class="link-arrow" href="#contenu">Découvrir le kit</a>
+          </div>
+          <div class="scroll-hint" aria-hidden="true"><span class="scroll-line"></span>Faites défiler</div>
         </div>
-        <figure class="hero-photo">
-          <div class="hero-photo-frame">
+
+        <figure class="poster">
+          <div class="poster-frame">
             <img src="/assets/kit-noel.webp" width="1254" height="1254" fetchpriority="high"
                  alt="Le kit de Noël Naillies : coffret bordeaux, mini-lampe rose, vernis gel, primer, base et top coats, capsules Soft Gel Tips, ponceuse, lime et brosse.">
           </div>
-          <figcaption>Le kit de Noël, avec capsules</figcaption>
         </figure>
+
+        <div class="chapters">
+          <article class="chapter chapter--left">
+            <p class="kicker">01 — Le coffret</p>
+            <h2>Tout est dans la&nbsp;boîte.</h2>
+            <p>Un coffret bordeaux, pensé pour être offert. À l’intérieur, chaque étape de la pose américaine amande, du primer au top coat.</p>
+          </article>
+          <article class="chapter chapter--bottom">
+            <p class="kicker">02 — Les gels</p>
+            <h2>Huit flacons. Une pose complète.</h2>
+            <p>Non Acid Primer, Rubber Base Coat, quatre Gel Polish, un Top Coat et un Golden Foiled Top Coat. 8&nbsp;ml chacun, formules HEMA&nbsp;&amp;&nbsp;TPO free.</p>
+          </article>
+          <article class="chapter chapter--right">
+            <p class="kicker">03 — La touche de Noël</p>
+            <h2>Le top coat doré.</h2>
+            <p>Le Golden Foiled Top Coat apporte la finition des fêtes, par-dessus la couleur.</p>
+          </article>
+          <article class="chapter chapter--left">
+            <p class="kicker">04 — La lampe</p>
+            <h2>Une mini-lampe UV/LED.</h2>
+            <p>Pour sécher chaque couche de gel, à la maison, sans rien d’autre à acheter.</p>
+          </article>
+          <article class="chapter chapter--right">
+            <p class="kicker">05 — La préparation</p>
+            <h2>Ponceuse, lime, brosse.</h2>
+            <p>Une ponceuse électrique avec ses embouts et bandes de ponçage, une lime 100/180 et une brosse à poussière.</p>
+          </article>
+          <article class="chapter chapter--bottom">
+            <p class="kicker">06 — En option</p>
+            <h2>120 capsules Soft&nbsp;Gel&nbsp;Tips.</h2>
+            <p>Le kit avec capsules ajoute 120 capsules en 12 tailles, full cover, forme amande.</p>
+          </article>
+          <article class="chapter chapter--cta">
+            <h2>Le kit de Noël, <span class="nowrap">à précommander.</span></h2>
+            <p>Livraison avant Noël.</p>
+            <a class="btn btn--light" href="#precommande" data-magnetic>Choisir mon kit</a>
+          </article>
+        </div>
+
+        <ol class="story-dots" aria-hidden="true">
+          <li></li><li></li><li></li><li></li><li></li><li></li>
+        </ol>
       </div>
     </section>
 
-    <!-- PRÉCOMMANDE -->
-    <section class="section" id="precommande" aria-labelledby="shop-title">
+    <!-- ===== PRÉCOMMANDE ===== -->
+    <section class="buy" id="precommande" aria-labelledby="shop-title">
       <div class="container">
-        <header class="section-head">
+        <header class="section-head section-head--center reveal">
           <p class="kicker">Précommande<span class="sep" aria-hidden="true"> · </span>Livraison avant Noël</p>
-          <h2 id="shop-title">Choisissez votre kit</h2>
+          <h2 id="shop-title">Choisissez votre kit.</h2>
           <p>Deux versions du même coffret. Le règlement s’effectue à la commande&nbsp;; le kit est ensuite préparé et livré avant Noël.<span id="shop-deadline" hidden></span></p>
         </header>
 
-        <div class="shop-grid">
-          <figure class="shop-photo">
-            <div class="shop-frame" id="shop-frame" data-tips="with">
-              <img src="/assets/kit-noel.webp" srcset="/assets/kit-noel-720.webp 720w, /assets/kit-noel.webp 1254w" sizes="(max-width: 960px) 100vw, 56vw"
-                   width="1254" height="1254" loading="lazy"
-                   alt="Contenu du kit de Noël Naillies, vu de dessus.">
-              <div class="tips-flag" aria-hidden="true">
-                <span class="when-with">+ 120 capsules incluses</span>
-                <span class="when-without">Non inclus<small>Soft Gel Tips</small></span>
+        <div class="buy-grid">
+          <div class="buy-stage" id="buy-stage">
+            <!-- Sans WebGL : la photo, avec le repère « non inclus » -->
+            <figure class="stage-fallback">
+              <div class="shop-frame" id="shop-frame" data-tips="with">
+                <img src="/assets/kit-noel.webp" srcset="/assets/kit-noel-720.webp 720w, /assets/kit-noel.webp 1254w" sizes="(max-width: 960px) 100vw, 56vw"
+                     width="1254" height="1254" loading="lazy" alt="Contenu du kit de Noël Naillies, vu de dessus.">
+                <div class="tips-flag" aria-hidden="true">
+                  <span class="when-with">+ 120 capsules incluses</span>
+                  <span class="when-without">Non inclus<small>Soft Gel Tips</small></span>
+                </div>
               </div>
-            </div>
-            <figcaption id="shop-caption">Avec capsules : 120 Soft Gel Tips, 12 tailles, full cover, forme amande.</figcaption>
-          </figure>
+            </figure>
+            <p class="stage-caption" id="shop-caption" aria-live="polite">Avec capsules : 120 Soft Gel Tips, 12 tailles, full cover, forme amande.</p>
+          </div>
 
-          <div class="panel">
+          <div class="panel reveal">
             <form id="order-form" novalidate>
               <fieldset>
                 <legend>Version du kit</legend>
@@ -146,7 +192,7 @@
               <p class="form-msg" id="form-msg" role="alert"></p>
 
               <p class="secure-note">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="0"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>
                 <span>Paiement sécurisé par Stripe. Vous serez redirigé vers la page de paiement.</span>
               </p>
             </form>
@@ -155,16 +201,59 @@
       </div>
     </section>
 
-    <!-- CONTENU -->
-    <section class="section contents" id="contenu" aria-labelledby="contents-title">
+    <!-- ===== CONTENU ===== -->
+    <section class="bento" id="contenu" aria-labelledby="contents-title">
       <div class="container">
-        <header class="section-head">
+        <header class="section-head section-head--center reveal">
           <p class="kicker">Le contenu</p>
-          <h2 id="contents-title">Tout est dans le coffret</h2>
-          <p>Du primer au top coat doré&nbsp;: de quoi réaliser la pose américaine amande de la collection de Noël.</p>
+          <h2 id="contents-title">Pensé pour la pose américaine amande.</h2>
+          <p>Du primer au top coat doré&nbsp;: de quoi réaliser la manucure de la collection de Noël, sans quitter la maison.</p>
         </header>
 
-        <div class="contents-grid">
+        <div class="bento-grid">
+          <article class="tile tile--wide tile--photo reveal" data-tilt>
+            <img class="tile-img" src="/assets/bento-gels.webp" width="990" height="320" loading="lazy" alt="Les huit flacons de 8 ml : primer, base, quatre Gel Polish, top coat et top coat doré.">
+            <div class="tile-copy">
+              <h3>Huit flacons.</h3>
+              <p>Primer, base, 4&nbsp;Gel Polish, Top Coat et Golden Foiled Top Coat.</p>
+            </div>
+          </article>
+
+          <article class="tile tile--stat tile--plum reveal" data-tilt>
+            <span class="stat">8</span>
+            <p>flacons de 8&nbsp;ml</p>
+          </article>
+
+          <article class="tile tile--wide tile--photo reveal" data-tilt>
+            <img class="tile-img tile-img--lamp" src="/assets/bento-lamp.webp" width="570" height="370" loading="lazy" alt="La mini-lampe UV/LED rose.">
+            <div class="tile-copy">
+              <h3>Mini-lampe UV/LED.</h3>
+              <p>Pour sécher chaque couche de gel.</p>
+            </div>
+          </article>
+
+          <article class="tile tile--sky reveal" data-tilt>
+            <svg class="tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="24" cy="24" r="17"/><path d="m16 24.5 5.5 5.5L33 18.5"/></svg>
+            <h3>HEMA &amp; TPO free</h3>
+            <p>Mention présente sur chaque flacon.</p>
+          </article>
+
+          <article class="tile tile--stat tile--bordeaux reveal" data-tilt>
+            <span class="stat">120</span>
+            <p>capsules Soft Gel Tips<br><span class="tile-note">Kit avec capsules · 12 tailles · full cover</span></p>
+          </article>
+
+          <article class="tile tile--wide tile--photo reveal" data-tilt>
+            <img class="tile-img tile-img--drill" src="/assets/bento-drill.webp" width="570" height="330" loading="lazy" alt="La ponceuse électrique, ses embouts et bandes de ponçage, la brosse et l’adaptateur secteur.">
+            <div class="tile-copy">
+              <h3>Ponceuse électrique.</h3>
+              <p>Embouts et bandes de ponçage, lime 100/180, brosse à poussière.</p>
+            </div>
+          </article>
+        </div>
+
+        <details class="full-list reveal">
+          <summary>Voir la liste complète du contenu</summary>
           <ol class="items">
             <li><span class="item-name">Gel Polish</span><span class="item-detail">4 flacons de 8&nbsp;ml</span></li>
             <li><span class="item-name">Non Acid Primer</span><span class="item-detail">8&nbsp;ml</span></li>
@@ -178,49 +267,43 @@
             <li><span class="item-name">Adaptateur secteur</span></li>
             <li><span class="item-name">Soft Gel Tips<span class="item-tag">Kit avec capsules</span></span><span class="item-detail">120 capsules, 12 tailles, full cover, forme amande</span></li>
           </ol>
-
-          <aside class="box-card" aria-label="Le coffret Naillies, collection de Noël">
-            <div class="wordmark">NAILLIES<span class="dot" aria-hidden="true"></span></div>
-            <div class="tagline">La manucure à domicile</div>
-            <div class="collection">La collection de Noël — Pose américaine amande</div>
-          </aside>
-        </div>
+        </details>
       </div>
     </section>
 
-    <!-- LIVRAISON -->
-    <section class="section steps-band" id="livraison" aria-labelledby="steps-title">
+    <!-- ===== LIVRAISON ===== -->
+    <section class="steps-band" id="livraison" aria-labelledby="steps-title">
       <div class="container">
-        <header class="section-head">
+        <header class="section-head reveal">
           <p class="kicker">Précommande, mode d’emploi</p>
-          <h2 id="steps-title">De la commande à la livraison</h2>
+          <h2 id="steps-title">De la commande à la livraison.</h2>
         </header>
         <ol class="steps">
-          <li>
+          <li class="reveal">
             <h3>Commande</h3>
             <p>Choix du kit et paiement en ligne, sécurisé par Stripe.</p>
           </li>
-          <li>
+          <li class="reveal">
             <h3>Préparation</h3>
             <p>Le coffret est préparé avec soin, puis expédié.</p>
           </li>
-          <li>
+          <li class="reveal">
             <h3>Livraison</h3>
             <p>Le kit est livré avant Noël, à l’adresse indiquée lors du paiement.</p>
           </li>
         </ol>
-        <p class="ship-info" id="ship-info"></p>
+        <p class="ship-info reveal" id="ship-info"></p>
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="section" id="faq" aria-labelledby="faq-title">
-      <div class="container">
-        <header class="section-head">
+    <!-- ===== FAQ ===== -->
+    <section class="faq" id="faq" aria-labelledby="faq-title">
+      <div class="container faq-grid">
+        <header class="section-head reveal">
           <p class="kicker">Questions fréquentes</p>
-          <h2 id="faq-title">Bon à savoir</h2>
+          <h2 id="faq-title">Bon à savoir.</h2>
         </header>
-        <div class="faq-list">
+        <div class="faq-list reveal">
           <details>
             <summary>Qu’est-ce qu’une précommande&nbsp;?</summary>
             <div class="answer"><p>Le kit est réglé dès la commande, avant sa livraison. Il est ensuite préparé et expédié pour arriver avant Noël.</p></div>
@@ -246,6 +329,16 @@
             <div class="answer"><p>La livraison est possible dans les pays suivants&nbsp;: <span id="faq-countries">France</span>.</p></div>
           </details>
         </div>
+      </div>
+    </section>
+
+    <!-- ===== CLÔTURE ===== -->
+    <section class="closing" aria-labelledby="closing-title">
+      <div class="container reveal">
+        <p class="kicker">La collection de Noël</p>
+        <h2 id="closing-title">Noël approche. <span class="nowrap">Le kit aussi.</span></h2>
+        <p>Précommandez maintenant, recevez avant Noël.</p>
+        <a class="btn btn--light" href="#precommande" data-magnetic>Précommander</a>
       </div>
     </section>
   </main>
@@ -280,5 +373,7 @@
       </div>
     </div>
   </footer>
+
+  <a class="mobile-cta" id="mobile-cta" href="#precommande" aria-hidden="true" tabindex="-1">Précommander<span data-from-price></span></a>
 </body>
 </html>

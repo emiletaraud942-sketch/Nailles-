@@ -73,6 +73,23 @@ test('la page propose exactement les kits du catalogue', () => {
   assert.deepEqual(values, catalog.kits.map((k) => k.id).sort());
 });
 
+test('toutes les ressources locales référencées par les pages existent', () => {
+  const dir = path.join(__dirname, '../public');
+  const routes = new Set(['', 'cgv', 'mentions-legales', 'merci']); // pages servies sans extension
+  const pages = fs.readdirSync(dir).filter((f) => f.endsWith('.html'));
+  assert.ok(pages.length >= 5);
+  for (const page of pages) {
+    const html = fs.readFileSync(path.join(dir, page), 'utf8');
+    for (const m of html.matchAll(/(?:src|href)="\/([^"#?]*)(?:[#?][^"]*)?"/g)) {
+      const ref = m[1];
+      if (routes.has(ref)) continue;
+      assert.ok(fs.existsSync(path.join(dir, ref)), `${page} référence /${ref} qui n'existe pas`);
+    }
+  }
+  // le bundle 3D est servi par le site
+  assert.ok(fs.statSync(path.join(dir, 'js/scene.js')).size > 100000, 'public/js/scene.js manquant : npm run build:scene');
+});
+
 test('buildSessionParams : prix serveur, livraison, redirections', () => {
   const kit = catalog.kits[0];
   const p = buildSessionParams({ kit, quantity: 2, origin: 'https://exemple.fr' });
@@ -188,7 +205,7 @@ test('GET /api/session : récapitulatif minimal, aucune donnée personnelle', as
 
 test('site statique : pages, 404, protection contre la traversée de dossiers, en-têtes de sécurité', async () => {
   await withServer(fakeStripe(), async (base) => {
-    for (const url of ['/', '/merci', '/cgv', '/mentions-legales', '/products.json', '/favicon.svg', '/assets/kit-noel.webp']) {
+    for (const url of ['/', '/merci', '/cgv', '/mentions-legales', '/products.json', '/favicon.svg', '/assets/kit-noel.webp', '/js/scene.js', '/ui.js', '/boot.js']) {
       assert.equal((await fetch(base + url)).status, 200, url);
     }
     const missing = await fetch(`${base}/page-inexistante`);

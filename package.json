@@ -11,9 +11,14 @@
     "start": "node server.js",
     "dev": "node --watch server.js",
     "test": "node --test",
-    "verifier": "node scripts/check.js"
+    "verifier": "node scripts/check.js",
+    "build:scene": "esbuild src/scene/main.js --bundle --minify --format=esm --target=es2020 --outfile=public/js/scene.js"
   },
   "dependencies": {
     "stripe": "^23.2.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "three": "^0.187.0"
   }
 }

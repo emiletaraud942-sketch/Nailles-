@@ -23,6 +23,9 @@
   let catalog = null;
   let closed = false;
   let loading = false;
+  let lastTips = null;
+  let shownTotal = null;
+  let tween = 0;
 
   const selectedKit = () => {
     const id = form.elements.kit.value;
@@ -44,6 +47,28 @@
     render();
   }
 
+  // Le total « roule » vers sa nouvelle valeur (sauf si l'animation est désactivée).
+  function animateTotal(cents) {
+    const el = $('#sum-total');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    cancelAnimationFrame(tween);
+    if (shownTotal === null || reduce) {
+      shownTotal = cents;
+      el.textContent = money(cents);
+      return;
+    }
+    const from = shownTotal;
+    const start = performance.now();
+    const step = (now) => {
+      const t = Math.min(1, (now - start) / 450);
+      const eased = 1 - Math.pow(1 - t, 3);
+      shownTotal = Math.round(from + (cents - from) * eased);
+      el.textContent = money(shownTotal);
+      if (t < 1) tween = requestAnimationFrame(step);
+    };
+    tween = requestAnimationFrame(step);
+  }
+
   // writeBack = false pendant la saisie, pour ne pas écraser ce que la personne tape.
   function render(writeBack = true) {
     if (!catalog) return;
@@ -58,7 +83,13 @@
     $('#sum-label').textContent = `${kit.includesTips ? 'Kit avec capsules' : 'Kit sans capsules'} × ${qty}`;
     $('#sum-subtotal').textContent = money(subtotal);
     $('#sum-shipping').textContent = shipping === 0 ? 'Offerte' : money(shipping);
-    $('#sum-total').textContent = money(subtotal + shipping);
+    animateTotal(subtotal + shipping);
+
+    // la scène 3D montre ou retire le coffret de capsules
+    if (lastTips !== kit.includesTips) {
+      lastTips = kit.includesTips;
+      window.dispatchEvent(new CustomEvent('kitchange', { detail: { tips: kit.includesTips } }));
+    }
 
     frame.dataset.tips = kit.includesTips ? 'with' : 'without';
     caption.textContent = CAPTIONS[kit.includesTips];
@@ -113,6 +144,9 @@
     const countries = new Intl.ListFormat('fr', { style: 'long', type: 'conjunction' }).format(
       catalog.shipping.countries.map((code) => names.of(code) || code)
     );
+    const cheapest = Math.min(...catalog.kits.map((k) => k.priceCents));
+    for (const el of document.querySelectorAll('[data-from-price]')) el.textContent = `dès ${money(cheapest)}`;
+
     const countriesEl = $('#faq-countries');
     if (countriesEl) countriesEl.textContent = countries;
 

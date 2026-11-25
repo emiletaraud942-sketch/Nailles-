@@ -45,11 +45,20 @@ Le site affiche ces valeurs et le serveur s'en sert pour Stripe : le prix ne peu
 
 Dans le tableau de bord Stripe, onglet Paiements : chaque commande porte la mention « Précommande Naillies », le kit et la quantité (métadonnées `kit`, `quantity`, `preorder`). L'adresse de livraison et le téléphone figurent dans le détail du paiement.
 
+## La scène 3D
+
+Le coffret en 3D (qui s'ouvre au défilement, puis vient se placer à côté du formulaire de commande) est construit avec three.js. Le code source est dans `src/scene/`, le résultat compilé dans `public/js/scene.js` (**commité**, donc rien à compiler à la mise en ligne).
+
+- Modifier un objet, une couleur ou le parcours de la caméra : `src/scene/models.js`, `src/scene/choreo.js`
+- Recompiler après une modification : `npm run build:scene`
+- Le bundle ne se charge qu'après le reste de la page. Si le navigateur n'a pas WebGL, si « réduire les animations » est activé ou en mode économie de données, la page affiche à la place la photo du kit : tout fonctionne de la même façon.
+
 ## Technique
 
 - `public/` : le site (HTML, CSS, JS sans framework, polices Bodoni Moda et Jost hébergées localement)
 - `api/checkout.js` : crée la session Stripe Checkout (`POST /api/checkout`)
 - `api/session.js` : récapitulatif de la page de confirmation, sans donnée personnelle
+- `src/scene/` : la scène 3D (compilée vers `public/js/scene.js`)
 - `server.js` : serveur Node autonome (local et hébergeurs classiques) ; sur Vercel, ce sont les fichiers de `api/` qui servent
 - `npm test` : tests automatisés du backend (avec un faux Stripe)
 
