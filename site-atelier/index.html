@@ -79,7 +79,7 @@ button{font-family:inherit}
 .hero{position:relative;height:100vh;min-height:620px;overflow:hidden;background:var(--paper)}
 .hero .eyebrow{position:absolute;top:92px;left:0;right:0;color:var(--ink-soft);z-index:3}
 .hero-bg{position:absolute;top:0;right:0;bottom:0;width:64%;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 38%);mask-image:linear-gradient(90deg,transparent 0,#000 38%);z-index:0}
-.hero-bg i{position:absolute;inset:-8%;background:url(img/coffret.webp) 55% 50%/cover no-repeat;filter:blur(22px) saturate(1.15);transform:scale(1.08);animation:drift 18s ease-in-out infinite alternate}
+.hero-bg i{position:absolute;inset:-8%;background:url(img/coffret.webp) 55% 50%/cover no-repeat;filter:blur(14px) saturate(1.15);transform:scale(1.08);animation:drift 18s ease-in-out infinite alternate}
 .hero-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 80% 40%,rgba(245,238,230,0) 0,rgba(245,238,230,.28) 70%),linear-gradient(0deg,rgba(245,238,230,.35),rgba(245,238,230,0) 40%)}
 .hero-bg b{position:absolute;inset:0;opacity:.18;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 @keyframes drift{from{transform:scale(1.08) translate(0,0)}to{transform:scale(1.14) translate(-2%,1.5%)}}
