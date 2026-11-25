@@ -1,0 +1,34 @@
+{
+  "_aide": "Source unique des prix et réglages. Le site affiche ces valeurs ET le serveur les utilise pour Stripe : on ne modifie qu'ici. Les prix sont en centimes, TTC.",
+  "currency": "eur",
+  "maxQuantity": 5,
+  "preorder": {
+    "_aide": "closesAt : date limite de précommande au format ISO avec fuseau, par exemple 2026-12-14T23:59:00+01:00. Laisser null tant qu'elle n'est pas décidée : le site n'affiche alors aucune date et accepte les commandes sans limite.",
+    "closesAt": null,
+    "deliveryPromise": "avant Noël"
+  },
+  "shipping": {
+    "_aide": "countries : codes pays ISO acceptés par Stripe Checkout (FR, BE, LU...). amountCents : 0 pour une livraison offerte.",
+    "countries": ["FR"],
+    "label": "Livraison avant Noël",
+    "amountCents": 490
+  },
+  "kits": [
+    {
+      "id": "avec-capsules",
+      "name": "Kit de Noël avec capsules",
+      "priceCents": 6990,
+      "includesTips": true,
+      "available": true,
+      "checkoutDescription": "Coffret Naillies, la collection de Noël, pose américaine amande. Avec 120 capsules Soft Gel Tips."
+    },
+    {
+      "id": "sans-capsules",
+      "name": "Kit de Noël sans capsules",
+      "priceCents": 5990,
+      "includesTips": false,
+      "available": true,
+      "checkoutDescription": "Coffret Naillies, la collection de Noël, pose américaine amande. Sans capsules."
+    }
+  ]
+}
