@@ -18,6 +18,7 @@
   color-scheme:light;
 }
 *,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
 html,body{background:var(--paper);color:var(--ink)}
 html.lenis{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
@@ -87,12 +88,11 @@ button{font-family:inherit}
 .hero .cta{z-index:3}
 .hero-title{position:absolute;left:0;right:0;top:50%;transform:translateY(-52%);font-size:clamp(96px,14vw,232px);color:var(--ink);z-index:1}
 .bottle{position:absolute;left:44%;top:50%;width:clamp(150px,16vw,260px);transform:translate(-50%,-44%);z-index:2}
-.bottle svg{display:block;width:100%;height:auto;overflow:visible}
 .bottle .cap{position:relative;z-index:1}
-.bottle .body{position:relative;z-index:2;margin-top:-2%}
+.bottle .body{position:relative;z-index:2;margin-top:-1px}
 .bottle .shadow{position:absolute;left:8%;right:8%;bottom:-5%;height:9%;border-radius:50%;background:radial-gradient(closest-side,rgba(40,12,22,.38),rgba(40,12,22,0));filter:blur(6px);z-index:0}
-.stem{position:absolute;left:50%;top:92%;width:5%;height:46vh;margin-left:-2.5%;transform-origin:50% 0;transform:scaleY(0);border-radius:2px 2px 40% 40%/2px 2px 10% 10%;background:linear-gradient(90deg,#0b0507,#4a3a40 45%,#0b0507);z-index:0}
-.stem::after{content:"";position:absolute;left:-70%;right:-70%;bottom:-1%;height:8%;border-radius:45% 45% 50% 50%/30% 30% 70% 70%;background:linear-gradient(90deg,#3a0612,#a22947 45%,#4a0818)}
+.stem{position:absolute;left:50%;top:94%;width:6%;height:46vh;margin-left:-3%;transform-origin:50% 0;transform:scaleY(0);border-radius:2px 2px 40% 40%/2px 2px 10% 10%;background:linear-gradient(90deg,#0b0507,#4a3a40 45%,#0b0507);z-index:0}
+.stem::after{content:"";position:absolute;left:-60%;right:-60%;bottom:-1%;height:8%;border-radius:45% 45% 50% 50%/30% 30% 70% 70%;background:linear-gradient(90deg,#3a0612,#a22947 45%,#4a0818)}
 .hero .meta{position:absolute;right:0;bottom:118px;width:min(280px,62vw);display:grid;gap:8px;color:var(--ink-soft);font-size:14.5px;line-height:1.5}
 .hero .meta b{color:var(--ink)}
 .hero .cta{position:absolute;right:0;bottom:44px}
@@ -370,41 +370,8 @@ button{font-family:inherit}
       <span class="l"><span class="w">maison.</span></span>
     </h1>
     <div class="bottle" aria-hidden="true">
-      <div class="cap">
-        <svg viewBox="0 0 200 262">
-          <defs>
-            <linearGradient id="gk" x1="0" x2="1"><stop offset="0" stop-color="#030203"/><stop offset=".14" stop-color="#2b2427"/><stop offset=".3" stop-color="#0d0a0b"/><stop offset=".62" stop-color="#050404"/><stop offset=".86" stop-color="#231c1f"/><stop offset="1" stop-color="#030203"/></linearGradient>
-            <linearGradient id="gs" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".32"/><stop offset="1" stop-color="#fff" stop-opacity=".04"/></linearGradient>
-          </defs>
-          <rect x="54" y="2" width="92" height="238" rx="8" fill="url(#gk)"/>
-          <rect x="54" y="2" width="92" height="7" rx="4" fill="#3a3236" opacity=".7"/>
-          <rect x="66" y="14" width="11" height="214" rx="5.5" fill="url(#gs)"/>
-          <rect x="131" y="18" width="4" height="206" rx="2" fill="#fff" opacity=".07"/>
-          <rect x="47" y="232" width="106" height="28" rx="6" fill="url(#gk)"/>
-          <rect x="47" y="232" width="106" height="3" rx="1.5" fill="#fff" opacity=".12"/>
-        </svg>
-        <span class="stem"></span>
-      </div>
-      <div class="body">
-        <svg viewBox="0 0 200 232">
-          <defs>
-            <linearGradient id="gb" x1="0" x2="1"><stop offset="0" stop-color="#030203"/><stop offset=".1" stop-color="#2a2326"/><stop offset=".24" stop-color="#0c090a"/><stop offset=".7" stop-color="#060505"/><stop offset=".9" stop-color="#211a1d"/><stop offset="1" stop-color="#030203"/></linearGradient>
-            <radialGradient id="gh" cx=".28" cy=".12" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
-          </defs>
-          <rect x="64" y="0" width="72" height="16" fill="#0b0809"/>
-          <rect x="8" y="10" width="184" height="216" rx="44" fill="url(#gb)"/>
-          <rect x="8" y="10" width="184" height="216" rx="44" fill="url(#gh)"/>
-          <rect x="21" y="44" width="12" height="150" rx="6" fill="#fff" opacity=".13"/>
-          <rect x="170" y="56" width="4" height="120" rx="2" fill="#fff" opacity=".06"/>
-          <text x="100" y="98" text-anchor="middle" font-family="Bodoni Moda, Georgia, serif" font-size="46" font-weight="500" fill="#F4EFEA">N</text>
-          <circle cx="119" cy="95" r="3.6" fill="#F4EFEA"/>
-          <text x="100" y="116" text-anchor="middle" font-family="Jost, sans-serif" font-size="6.6" letter-spacing="1.7" fill="#CFC6C9">NAIL ART &amp; MANUCURE</text>
-          <text x="100" y="142" text-anchor="middle" font-family="Jost, Arial, sans-serif" font-size="17" font-weight="600" letter-spacing=".4" fill="#FFFFFF">GEL POLISH</text>
-          <rect x="56" y="151" width="88" height="15" rx="7.5" fill="#ECE5DF"/>
-          <text x="100" y="161.6" text-anchor="middle" font-family="Jost, Arial, sans-serif" font-size="7.4" font-weight="600" letter-spacing=".5" fill="#2A2226">HEMA &amp; TPO FREE</text>
-          <text x="100" y="191" text-anchor="middle" font-family="Jost, Arial, sans-serif" font-size="10" fill="#E9E2DE">8ml</text>
-        </svg>
-      </div>
+      <div class="cap"><img src="img/bouchon.webp" alt="" width="380" height="484"><span class="stem"></span></div>
+      <div class="body"><img src="img/flacon.webp" alt="" width="380" height="472"></div>
       <span class="shadow"></span>
     </div>
     <div class="meta glass" style="right:max(20px,4vw)">
@@ -642,7 +609,6 @@ button{font-family:inherit}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
 /* Réglages : collez ici vos liens de paiement Stripe (Payment Links) et vos prix en euros. */
 const CONFIG = {
@@ -861,12 +827,6 @@ document.addEventListener("click", e => {
   if (!window.gsap || !window.ScrollTrigger || reduce) return;
   gsap.registerPlugin(ScrollTrigger);
   document.documentElement.classList.add("is-anim");
-  if (window.Lenis) {
-    lenis = new Lenis({ lerp: .085, smoothWheel: true });
-    lenis.on("scroll", ScrollTrigger.update);
-    gsap.ticker.add(t => lenis.raf(t * 1000));
-    gsap.ticker.lagSmoothing(0);
-  }
   const prepRibbon = svg => $$(".rp", svg).map(p => { const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; return p; });
 
   gsap.from(".hero-title .w", { yPercent: 115, duration: 1.3, ease: "expo.out", stagger: .09, delay: .1 });
@@ -874,7 +834,7 @@ document.addEventListener("click", e => {
   gsap.from(".hero .meta, .hero .cta, .hero .eyebrow, .hero .scroll", { autoAlpha: 0, y: 14, duration: 1, ease: "power3.out", delay: .9, stagger: .07 });
 
   gsap.timeline({ scrollTrigger: { trigger: ".hero", start: "top top", end: "+=140%", scrub: 1, pin: true } })
-    .to(".bottle .cap", { y: () => -innerHeight * .3, rotate: -4, ease: "none" }, 0)
+    .to(".bottle .cap", { y: () => -innerHeight * .3, ease: "none" }, 0)
     .to(".bottle .stem", { scaleY: 1, ease: "none" }, 0)
     .to(".bottle .body", { y: () => innerHeight * .15, ease: "none" }, 0)
     .to(".bottle .shadow", { y: () => innerHeight * .15, ease: "none" }, 0)
