@@ -2,235 +2,367 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..500;1,6..96,400&family=Jost:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Jost:wght@400;500;600&display=swap">
 <style>
-/* Mise en page : éditorial de mode. Titres serif condensés immenses, papier ivoire et noir prune, flacon et rubans animés au défilement, bordeaux pour les actions. Une seule ambiance voulue, claire puis sombre. */
+/* Mise en page : éditorial de mode. Titres serif condensés immenses et bien gras, papier ivoire et noir prune, flacon et rubans animés au défilement, cartes vitrées sur photo, boutique en vues superposées. Une seule ambiance voulue, claire puis sombre. */
 :root{
   --paper:#F5EEE6; --paper-2:#EDE3D7;
-  --ink:#1D0C14; --ink-soft:#5E4B53;
-  --night:#120709; --night-2:#1C0B12; --night-text:#F4EBE2; --night-muted:#B7A3AA;
+  --ink:#1D0C14; --ink-soft:#4F3D45;
+  --night:#120709; --night-2:#1C0B12; --night-text:#F7EFE7; --night-muted:#D2C2C8;
   --bordeaux:#6B0F26; --bordeaux-2:#8E1B36; --plum:#5C0C3A;
-  --champagne:#D9BE95;
-  --line:rgba(29,12,20,.18); --night-line:rgba(244,235,226,.22);
+  --champagne:#DCC29A;
+  --line:rgba(29,12,20,.16); --night-line:rgba(247,239,231,.26);
+  --glass:rgba(255,250,245,.42); --glass-line:rgba(255,255,255,.6);
   --display:'Bodoni Moda', Didot, 'Bodoni 72', Georgia, serif;
   --sans:'Jost', Futura, system-ui, -apple-system, sans-serif;
   color-scheme:light;
 }
 *,*::before,*::after{box-sizing:border-box}
 html,body{background:var(--paper);color:var(--ink)}
-body{font-family:var(--sans);font-weight:400;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html.lenis{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+[data-lenis-prevent]{overscroll-behavior:contain}
+body{font-family:var(--sans);font-weight:400;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--paper)}
 a{color:inherit}
 img{display:block;max-width:100%;height:auto}
 p{margin:0}
 h1,h2,h3{margin:0;font-weight:400}
+button{font-family:inherit}
 .gut{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
 @media (min-width:800px){.gut{padding-left:max(44px,env(safe-area-inset-left,0px));padding-right:max(44px,env(safe-area-inset-right,0px))}}
-.tiny{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase}
-:focus-visible{outline:1.5px solid var(--bordeaux);outline-offset:3px}
+.tiny{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:500}
+:focus-visible{outline:2px solid var(--bordeaux);outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* Titres condensés : Bodoni resserré, comme une didone condensée */
-.big{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:.8;letter-spacing:-.005em}
+/* Titres condensés, épaissis pour bien se lire */
+.big{font-family:var(--display);font-weight:640;font-optical-sizing:none;font-variation-settings:"opsz" 28;text-transform:uppercase;line-height:.82;letter-spacing:0;min-width:0;max-width:100%}
 .big .l{display:block;overflow:hidden;padding:.2em 0 .02em;margin-top:-.13em;white-space:nowrap}
-.big .w{display:inline-block;transform-origin:0 100%;transform:scaleX(.58)}
-.big .l.c .w{transform-origin:50% 100%}
-.big em{font-style:italic}
-.big{min-width:0;max-width:100%}
-.colors>*,.stage>*,.wrapin>*,.menu-head>*,.sets-head>*{min-width:0}
+.big .w{display:inline-block;transform-origin:0 100%;transform:scaleX(.6)}
 .big .l.c{display:flex;justify-content:center}
-@media (max-width:600px){.colors .big{font-size:16.5vw}.night .big{font-size:21vw}.final .big{font-size:18vw}}
+.big .l.c .w{transform-origin:50% 100%}
+.big em{font-style:italic;font-weight:600}
+.serif{font-family:var(--display);font-weight:600;font-optical-sizing:none;font-variation-settings:"opsz" 24}
 
-/* Pastille d'action */
-.pill{display:inline-flex;align-items:center;gap:18px;min-height:46px;padding:0 10px 0 24px;border-radius:999px;background:var(--bordeaux);color:#F8EFE6;border:0;font:500 10.5px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background .3s}
-.pill .ar{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:rgba(248,239,230,.14);font-size:14px;letter-spacing:0;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+/* Pastilles d'action */
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:16px;min-height:48px;padding:0 10px 0 24px;border-radius:999px;background:var(--bordeaux);color:#FBF3EB;border:0;font:600 11.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background .3s}
+.pill .ar{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:rgba(251,243,235,.16);font-size:14px;letter-spacing:0;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
 .pill:hover{background:var(--bordeaux-2)}
 .pill:hover .ar{transform:rotate(45deg)}
 .pill.light{background:var(--night-text);color:var(--night)}
 .pill.light .ar{background:rgba(18,7,9,.1)}
+.pill.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.pill.ghost .ar{background:rgba(29,12,20,.08)}
+.pill.ghost:hover{background:rgba(29,12,20,.06)}
+.pill.block{width:100%;padding:0 10px 0 24px;justify-content:space-between}
 .pill[disabled]{opacity:.55;cursor:progress}
 
 /* En-tête */
 .top{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:50;pointer-events:none}
-.top .bar{display:flex;justify-content:space-between;align-items:center;padding-block:18px}
-.top .blend{display:flex;align-items:center;gap:40px;color:var(--ink);pointer-events:auto;transition:color .4s}
-.top.on-dark .blend{color:var(--night-text)}
-.brand{font-family:var(--display);font-size:19px;letter-spacing:.24em;text-decoration:none;text-transform:uppercase}
-.links{display:flex;gap:28px}
-.links a{text-decoration:none;opacity:.85}
-.links a:hover{opacity:1}
-.top .pill{pointer-events:auto;min-height:40px;padding:0 8px 0 18px}
+.top .bar{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:16px}
+.top .left{display:flex;align-items:center;gap:40px;color:var(--ink);pointer-events:auto;transition:color .4s}
+.top.on-dark .left{color:var(--night-text)}
+.brand{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:.22em;text-decoration:none;text-transform:uppercase}
+.links{display:flex;gap:26px}
+.links a{text-decoration:none}
+.links a:hover{text-decoration:underline;text-underline-offset:5px}
+.top .right{display:flex;align-items:center;gap:10px;pointer-events:auto}
+.top .pill{min-height:42px;padding:0 8px 0 18px}
 .top .pill .ar{width:26px;height:26px}
-@media (max-width:820px){.links{display:none}}
+.cart-btn{display:inline-flex;align-items:center;gap:10px;min-height:42px;padding:0 16px;border-radius:999px;border:0;background:rgba(255,250,245,.55);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:inset 0 0 0 1px rgba(29,12,20,.14);color:var(--ink);font:600 11.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+.cart-btn b{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:var(--bordeaux);color:#fff;font-weight:600;letter-spacing:0}
+@media (max-width:900px){.links{display:none}}
+@media (max-width:480px){.top .pill .t{display:none}.top .pill{padding:0 8px}.cart-btn .t{display:none}}
 
 /* 1. Ouverture */
 .hero{position:relative;height:100vh;min-height:620px;overflow:hidden;background:var(--paper)}
-.hero .eyebrow{position:absolute;top:92px;left:0;right:0;color:var(--ink-soft)}
-.hero-title{position:absolute;left:0;right:0;top:50%;transform:translateY(-52%);font-size:clamp(96px,14.2vw,236px);color:var(--ink);z-index:1}
-.bottle{position:absolute;left:43%;top:50%;width:clamp(150px,17vw,280px);transform:translate(-50%,-46%);z-index:2;filter:drop-shadow(0 40px 40px rgba(60,20,30,.22))}
+.hero .eyebrow{position:absolute;top:92px;left:0;right:0;color:var(--ink-soft);z-index:3}
+.hero-bg{position:absolute;top:0;right:0;bottom:0;width:64%;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 38%);mask-image:linear-gradient(90deg,transparent 0,#000 38%);z-index:0}
+.hero-bg i{position:absolute;inset:-8%;background:url(img/coffret.webp) 55% 50%/cover no-repeat;filter:blur(22px) saturate(1.15);transform:scale(1.08);animation:drift 18s ease-in-out infinite alternate}
+.hero-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 80% 40%,rgba(245,238,230,0) 0,rgba(245,238,230,.28) 70%),linear-gradient(0deg,rgba(245,238,230,.35),rgba(245,238,230,0) 40%)}
+.hero-bg b{position:absolute;inset:0;opacity:.18;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+@keyframes drift{from{transform:scale(1.08) translate(0,0)}to{transform:scale(1.14) translate(-2%,1.5%)}}
+.hero .meta{z-index:3}
+.hero .meta.glass{padding:18px 20px;border-radius:20px}
+.hero .cta{z-index:3}
+.hero-title{position:absolute;left:0;right:0;top:50%;transform:translateY(-52%);font-size:clamp(96px,14vw,232px);color:var(--ink);z-index:1}
+.bottle{position:absolute;left:44%;top:50%;width:clamp(150px,16vw,260px);transform:translate(-50%,-44%);z-index:2}
+.bottle svg{display:block;width:100%;height:auto;overflow:visible}
 .bottle .cap{position:relative;z-index:1}
-.bottle .body{position:relative;z-index:2;margin-top:-1px}
-.stem{position:absolute;left:50%;top:96%;width:7%;height:44vh;margin-left:-3.5%;transform-origin:50% 0;transform:scaleY(0);border-radius:0 0 40% 40%/0 0 12% 12%;background:linear-gradient(90deg,#0b0507,#3a2a2f 45%,#0b0507);z-index:0}
-.stem::after{content:"";position:absolute;left:-55%;right:-55%;bottom:-2%;height:9%;border-radius:45% 45% 50% 50%/30% 30% 70% 70%;background:linear-gradient(90deg,#3a0612,#8e1b36 45%,#4a0818)}
-.hero .meta{position:absolute;right:0;bottom:118px;width:min(250px,60vw);display:grid;gap:10px;color:var(--ink-soft);font-size:12.5px;line-height:1.5}
-.hero .meta b{color:var(--ink);font-weight:500}
+.bottle .body{position:relative;z-index:2;margin-top:-2%}
+.bottle .shadow{position:absolute;left:8%;right:8%;bottom:-5%;height:9%;border-radius:50%;background:radial-gradient(closest-side,rgba(40,12,22,.38),rgba(40,12,22,0));filter:blur(6px);z-index:0}
+.stem{position:absolute;left:50%;top:92%;width:5%;height:46vh;margin-left:-2.5%;transform-origin:50% 0;transform:scaleY(0);border-radius:2px 2px 40% 40%/2px 2px 10% 10%;background:linear-gradient(90deg,#0b0507,#4a3a40 45%,#0b0507);z-index:0}
+.stem::after{content:"";position:absolute;left:-70%;right:-70%;bottom:-1%;height:8%;border-radius:45% 45% 50% 50%/30% 30% 70% 70%;background:linear-gradient(90deg,#3a0612,#a22947 45%,#4a0818)}
+.hero .meta{position:absolute;right:0;bottom:118px;width:min(280px,62vw);display:grid;gap:8px;color:var(--ink-soft);font-size:14.5px;line-height:1.5}
+.hero .meta b{color:var(--ink)}
 .hero .cta{position:absolute;right:0;bottom:44px}
-.hero .scroll{position:absolute;left:0;bottom:44px;color:var(--ink-soft)}
+.hero .scroll{position:absolute;left:0;bottom:50px;color:var(--ink-soft)}
 @media (max-width:760px){
-  .hero-title{font-size:23vw;top:44%}
-  .bottle{left:auto;right:6%;width:30vw;top:56%;transform:translate(0,-46%)}
-  .hero .meta{left:0;right:auto;bottom:110px;width:58vw}
+  .hero-title{font-size:22vw;top:42%}
+  .bottle{left:auto;right:7%;width:28vw;top:56%;transform:translate(0,-44%)}
+  .hero .meta{left:20px;right:auto!important;bottom:112px;width:62vw}
+  .hero-bg{width:100%;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 30%,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 30%,#000 62%,transparent 100%)}
   .hero .cta{left:0;right:auto}
   .hero .scroll{display:none}
 }
 
 /* 2. Les teintes et le ruban */
 .colors{position:relative;min-height:100vh;overflow:hidden;background:var(--paper);display:grid;align-content:center;padding-block:110px 80px}
-.colors .big{font-size:clamp(84px,12.4vw,210px);position:relative;z-index:1}
+.colors>*{min-width:0}
+.colors .big{font-size:clamp(84px,12.2vw,206px);position:relative;z-index:1}
 .ribbon{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
 .colors .foot{position:relative;z-index:3;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:28px;margin-top:56px}
-.swatches{display:flex;gap:clamp(14px,3vw,40px);list-style:none;margin:0;padding:0}
+.swatches{display:flex;flex-wrap:wrap;gap:clamp(14px,3vw,40px);list-style:none;margin:0;padding:0}
 .swatches li{display:grid;justify-items:center;gap:10px}
-.sw{width:clamp(34px,4.2vw,56px);aspect-ratio:3/4;border-radius:50%;transform:rotate(16deg);background:radial-gradient(ellipse at 34% 26%,rgba(255,255,255,.55) 0 7%,rgba(255,255,255,0) 24%),radial-gradient(ellipse at 50% 55%,var(--c) 0 55%,var(--c2) 100%);box-shadow:0 10px 18px -10px rgba(40,10,20,.6)}
-.swatches span{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap}
-.colors .note{max-width:260px;font-size:12.5px;color:var(--ink-soft)}
+.sw{width:clamp(36px,4.2vw,56px);aspect-ratio:3/4;border-radius:50%;transform:rotate(16deg);background:radial-gradient(ellipse at 34% 26%,rgba(255,255,255,.55) 0 7%,rgba(255,255,255,0) 24%),radial-gradient(ellipse at 50% 55%,var(--c) 0 55%,var(--c2) 100%);box-shadow:0 10px 18px -10px rgba(40,10,20,.6)}
+.swatches span{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap}
+.colors .note{max-width:300px;font-size:14.5px;color:var(--ink-soft)}
+@media (max-width:600px){.colors .big{font-size:16vw}}
 
-/* 3. Section nuit : cercle qui s'ouvre */
+/* 3. Section nuit */
 .night{position:relative;background:var(--night);color:var(--night-text);overflow:hidden}
 .night .stage{position:relative;padding-block:120px 60px}
-.night .big{font-size:clamp(84px,12.8vw,216px);position:relative;z-index:1}
+.night .stage>*{min-width:0}
+.night .big{font-size:clamp(84px,12.6vw,212px);position:relative;z-index:1}
 .night .ribbon{z-index:2}
 .night .reveal{position:relative;margin-top:40px;aspect-ratio:941/1022;max-width:min(560px,100%);overflow:hidden}
 .night .reveal img{width:100%;height:100%!important;object-fit:cover}
-.night .cap-txt{position:relative;z-index:4;margin-top:28px;display:grid;gap:6px;max-width:300px}
-.night .cap-txt .t{font-family:var(--display);font-style:italic;font-size:26px}
-.night .cap-txt p{color:var(--night-muted);font-size:13px}
+.night .cap-txt{position:relative;z-index:4;margin-top:28px;display:grid;gap:8px;max-width:340px}
+.night .cap-txt .t{font-size:30px;font-style:italic}
+.night .cap-txt p{color:var(--night-text);font-size:15px}
 .is-anim .night .stage{height:100vh;min-height:620px;padding-block:0;display:grid;align-content:center}
 .is-anim .night .reveal{position:absolute;inset:0;margin:0;max-width:none;aspect-ratio:auto;z-index:3;clip-path:circle(0% at 66% 58%)}
-.is-anim .night .reveal::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(18,7,9,.55),rgba(18,7,9,0) 45%)}
+.is-anim .night .reveal::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(18,7,9,.62),rgba(18,7,9,0) 50%)}
 .is-anim .night .cap-txt{position:absolute;left:0;bottom:56px;margin:0}
-.is-anim .night .cap-txt{padding-left:inherit}
+@media (max-width:600px){.night .big{font-size:20vw}}
 
-/* 4. Bandeau photo */
-.band{position:relative;height:78vh;min-height:420px;overflow:hidden;background:var(--paper-2)}
-.band img{position:absolute;left:0;top:-12%;width:100%;height:124%!important;object-fit:cover;object-position:50% 40%}
+/* 4. Le coffret : cartes vitrées sur photo */
+.box{position:relative;overflow:hidden;background:var(--bordeaux)}
+.box-bg{position:absolute;left:0;right:0;top:-10%;height:120%;background:url(img/coffret.webp) 50% 50%/cover no-repeat}
+.box-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(245,238,230,.2),rgba(107,15,38,.25))}
+.box .in{position:relative;padding-block:clamp(90px,11vw,150px)}
+.box-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:clamp(36px,5vw,64px)}
+.box-head>*{min-width:0}
+.box-head .big{font-size:clamp(90px,12.6vw,210px);color:#FBF3EB;text-shadow:0 10px 40px rgba(40,6,18,.35)}
+.glass{background:var(--glass);-webkit-backdrop-filter:blur(20px) saturate(1.35);backdrop-filter:blur(20px) saturate(1.35);border:1px solid var(--glass-line);box-shadow:0 20px 50px -24px rgba(40,6,18,.45),inset 0 1px 0 rgba(255,255,255,.6)}
+.box-head .glass{max-width:340px;padding:18px 22px;border-radius:18px;color:var(--ink);font-size:15px}
+.gcards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,1.6vw,22px)}
+.gcard{border-radius:22px;padding:12px 12px 18px;display:grid;gap:12px;align-content:start;color:var(--ink);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.gcard:hover{transform:translateY(-6px)}
+.gcard .ph{border-radius:14px;overflow:hidden;background:var(--paper-2)}
+.crop{display:block;width:100%;aspect-ratio:4/3;max-width:100%;background-image:url(img/flatlay.webp);background-repeat:no-repeat}
+.gcard .tx{display:grid;gap:4px;padding:0 6px}
+.gcard h3{font-size:21px;line-height:1.15}
+.gcard p{font-size:14px;color:var(--ink-soft);line-height:1.45}
+.gcard .q{justify-self:start;margin:4px 0 0 6px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--bordeaux);background:rgba(255,255,255,.6);border-radius:999px;padding:5px 10px}
+.gcard.feature{grid-column:span 2;grid-template-columns:1.1fr 1fr;align-items:center}
+.gcard.feature .crop{aspect-ratio:auto;height:100%;min-height:200px}
+.gcard.feature .ph{height:100%}
+.box .shop-cta{margin-top:clamp(28px,4vw,48px);display:flex;flex-wrap:wrap;gap:12px}
+@media (max-width:980px){.gcards{grid-template-columns:1fr 1fr}.gcard.feature{grid-column:span 2}}
+@media (max-width:560px){.gcards{grid-template-columns:1fr}.gcard.feature{grid-column:auto;grid-template-columns:1fr}.gcard.feature .crop{aspect-ratio:4/3;height:auto;min-height:0}}
 
-/* 5. Le coffret, façon carte de salon */
-.menu{background:var(--paper);padding-block:clamp(90px,12vw,160px)}
-.menu-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:clamp(40px,6vw,80px)}
-.menu-head .big{font-size:clamp(90px,13vw,220px)}
-.menu-head p{max-width:280px;color:var(--ink-soft);font-size:13px}
-.menu-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-.menu-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:20px;border-bottom:1px solid var(--line);padding:4px 0 2px;cursor:default}
-.menu-row .big{font-size:clamp(46px,6.4vw,104px);transition:color .35s,transform .5s cubic-bezier(.2,.8,.2,1)}
-.menu-row .d{text-align:right;color:var(--ink-soft);font-size:11px;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
-.menu-row:hover .big{color:var(--bordeaux);transform:translateX(14px)}
-.menu-row .d em{display:block;font-style:normal;color:var(--bordeaux)}
-.preview{position:fixed;left:0;top:0;width:260px;z-index:40;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.8);transition:opacity .3s,transform .4s cubic-bezier(.2,.8,.2,1);background-image:url(img/flatlay.webp);background-repeat:no-repeat;box-shadow:0 30px 60px -20px rgba(29,12,20,.45)}
-.preview.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
-@media (hover:none){.preview{display:none}}
-@media (max-width:600px){.menu-row{grid-template-columns:1fr}.menu-row .d{text-align:left;padding-bottom:10px}}
-
-/* 6. Les kits, galerie horizontale */
+/* 5. Les kits, galerie horizontale */
 .sets{background:var(--paper);overflow:hidden}
 .sets .wrapin{padding-block:90px 70px;display:grid;gap:44px}
+.sets .wrapin>*{min-width:0}
 .sets-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px}
+.sets-head>*{min-width:0}
 .sets-head .big{font-size:clamp(90px,12.6vw,212px)}
-.sets-head p{max-width:290px;color:var(--ink-soft);font-size:13px}
+.sets-head p{max-width:320px;color:var(--ink-soft);font-size:15px}
 .track-wrap{overflow-x:auto;scrollbar-width:none}
 .track-wrap::-webkit-scrollbar{display:none}
 .track{display:flex;gap:clamp(16px,2vw,28px);width:max-content;padding-bottom:6px}
-.card{flex:none;width:clamp(240px,26vw,380px);display:grid;gap:14px;align-content:start}
-.card .ph{aspect-ratio:3/4;overflow:hidden;background:var(--paper-2);max-width:100%}
+.card{flex:none;width:clamp(250px,26vw,380px);display:grid;gap:12px;align-content:start}
+.card a.go{display:grid;gap:12px;text-decoration:none;color:inherit}
+.card .ph{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--paper-2);max-width:100%;border-radius:4px}
 .card.tall .ph{aspect-ratio:3/4.4}
 .card .ph img{width:100%;height:100%!important;object-fit:cover;transition:transform 1s cubic-bezier(.2,.8,.2,1)}
 .card:hover .ph img{transform:scale(1.05)}
+.card .ph .see{position:absolute;left:14px;bottom:14px;padding:8px 14px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s}
+.card:hover .ph .see,.card a.go:focus-visible .ph .see{opacity:1;transform:none}
 .card .row{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
-.card h3{font-family:var(--display);font-size:24px;line-height:1.1}
+.card h3{font-size:25px;line-height:1.1}
 .card h3 i{font-style:italic}
-.card .k{color:var(--ink-soft);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase}
-.card p.s{color:var(--ink-soft);font-size:13px}
-.card .price{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--bordeaux)}
-.card .price.num{font-family:var(--display);font-size:22px;letter-spacing:0;text-transform:none;color:var(--ink)}
+.card .k{color:var(--ink-soft);font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.card p.s{color:var(--ink-soft);font-size:14.5px}
+.price{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--bordeaux)}
+.price.num{font-family:var(--display);font-weight:600;font-size:22px;letter-spacing:0;text-transform:none;color:var(--ink)}
 .card .pill{justify-self:start;margin-top:4px}
 .is-anim .sets .track-wrap{overflow:visible}
 .is-anim .sets .wrapin{min-height:100vh;align-content:center;padding-block:80px 40px}
 
-/* 7. Final nuit */
+/* 6. Final nuit */
 .final{background:var(--night);color:var(--night-text);text-align:center;overflow:hidden}
 .final .wrapin{padding-block:clamp(110px,16vw,200px) 60px;display:grid;justify-items:center;gap:30px}
-.final .big{font-size:clamp(90px,13.6vw,230px)}
+.final .wrapin>*{min-width:0}
+.final .big{font-size:clamp(90px,13.4vw,226px)}
 .final .rule{width:min(520px,70vw);height:1px;background:var(--night-line);transform-origin:0 50%}
-.final .ast{font-family:var(--display);font-size:34px;line-height:1;color:var(--champagne)}
-.final .lead{font-family:var(--display);font-style:italic;font-size:clamp(20px,2.2vw,28px)}
-.final .sub{color:var(--night-muted);max-width:44ch;font-size:13.5px}
-.final .acts{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
-.nl{width:min(520px,100%);display:grid;gap:12px;margin-top:20px;text-align:left}
-.nl-row{display:flex;border-bottom:1px solid var(--night-line)}
+.final .ast{font-family:var(--display);font-size:38px;line-height:1;color:var(--champagne)}
+.final .lead{font-size:clamp(24px,2.4vw,32px);font-style:italic}
+.final .sub{color:var(--night-muted);max-width:46ch;font-size:15.5px}
+.final .acts{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.final .pill.ghost{color:var(--night-text);box-shadow:inset 0 0 0 1.5px var(--night-text)}
+.final .pill.ghost .ar{background:rgba(247,239,231,.12)}
+.nl{width:min(540px,100%);display:grid;gap:12px;margin-top:20px;text-align:left}
+.nl-row{display:flex;border-bottom:1.5px solid var(--night-line)}
 .nl-row:focus-within{border-bottom-color:var(--night-text)}
-.nl-row input{flex:1;min-width:0;background:transparent;border:0;color:var(--night-text);font:300 17px var(--sans);min-height:54px;padding:0 2px}
+.nl-row input{flex:1;min-width:0;background:transparent;border:0;color:var(--night-text);font:400 17px var(--sans);min-height:54px;padding:0 2px}
 .nl-row input::placeholder{color:var(--night-muted)}
 .nl-row input:focus{outline:none}
-.nl-row button{background:none;border:0;color:var(--night-text);font:500 10.5px var(--sans);letter-spacing:.22em;text-transform:uppercase;cursor:pointer;padding:0 2px 0 16px}
-.consent{display:flex;gap:12px;align-items:flex-start;font-size:12.5px;line-height:1.5}
+.nl-row button{background:none;border:0;color:var(--night-text);font:600 11.5px var(--sans);letter-spacing:.18em;text-transform:uppercase;cursor:pointer;padding:0 2px 0 16px}
+.consent{display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.5}
 .final .consent{color:var(--night-muted)}
-.consent input{margin-top:2px;flex:none;width:16px;height:16px;accent-color:#8E1B36}
-.status{font-size:13.5px;min-height:1.4em}
+.consent input{margin-top:3px;flex:none;width:17px;height:17px;accent-color:#8E1B36}
+.status{font-size:14.5px;min-height:1.4em}
 .final .status.ok{color:var(--champagne)}
-.final .status.err{color:#F3A7B8}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.final .status.err{color:#F6B4C3}
+@media (max-width:600px){.final .big{font-size:17vw}}
 .legal-foot{border-top:1px solid var(--night-line);margin-top:70px;padding-block:26px 34px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;color:var(--night-muted);text-align:left;width:100%}
-.legal-foot details{max-width:640px}
+.legal-foot details{max-width:660px}
 .legal-foot summary{cursor:pointer}
-.legal-foot .lg{display:grid;gap:8px;margin-top:14px;font-size:12.5px;line-height:1.6;letter-spacing:0;text-transform:none}
-.legal-foot b{color:var(--night-text);font-weight:500}
+.legal-foot .lg{display:grid;gap:8px;margin-top:14px;font-size:14px;line-height:1.6;letter-spacing:0;text-transform:none;font-weight:400}
+.legal-foot b{color:var(--night-text);font-weight:600}
 
-/* Fenêtre de réservation */
+/* Boutique : vues superposées */
+.view{position:fixed;inset:0;z-index:70;background:var(--paper);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.view-bar{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:14px;background:rgba(245,238,230,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.view-bar .back{text-decoration:none;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.view-bar .brand{position:absolute;left:50%;transform:translateX(-50%)}
+@media (max-width:560px){.view-bar .brand{display:none}}
+.view-body{padding-block:40px 90px}
+.crumbs{color:var(--ink-soft);margin-bottom:18px}
+.crumbs a{text-decoration:none}
+.crumbs a:hover{text-decoration:underline}
+.shop-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:44px}
+.shop-head>*{min-width:0}
+.shop-head .big{font-size:clamp(84px,11vw,180px)}
+.shop-head p{max-width:360px;color:var(--ink-soft);font-size:15.5px}
+.pgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,2.4vw,32px)}
+.pcard{display:grid;gap:14px;align-content:start;min-width:0}
+.pcard a.go{text-decoration:none;color:inherit;display:grid;gap:14px}
+.pcard .ph{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:6px;background:var(--paper-2);max-width:100%}
+.pcard .ph img{position:absolute;inset:0;width:100%;height:100%!important;object-fit:cover;transition:opacity .6s,transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.pcard .ph img.alt{opacity:0}
+.pcard:hover .ph img.alt{opacity:1}
+.pcard:hover .ph img{transform:scale(1.04)}
+.pcard .badge{position:absolute;top:14px;left:14px;z-index:2;padding:8px 14px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.pcard .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.pcard h3{font-size:clamp(26px,2.6vw,34px);line-height:1.05}
+.pcard p.s{color:var(--ink-soft);font-size:15px}
+.pcard .acts{display:flex;flex-wrap:wrap;gap:10px}
+@media (max-width:700px){.pgrid{grid-template-columns:1fr}}
+.assure{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:56px}
+.assure div{border-radius:18px;padding:18px;background:rgba(255,255,255,.55);box-shadow:inset 0 0 0 1px var(--line);display:grid;gap:4px}
+.assure b{font-size:16px}
+.assure span{font-size:13.5px;color:var(--ink-soft)}
+@media (max-width:860px){.assure{grid-template-columns:1fr 1fr}}
+.inview{margin-top:64px}
+.inview h2{font-size:clamp(30px,3.4vw,44px);margin-bottom:22px}
+.inview .gcards{grid-template-columns:repeat(4,minmax(0,1fr))}
+.inview .gcard{background:#fff;border:1px solid var(--line);box-shadow:none}
+@media (max-width:980px){.inview .gcards{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.inview .gcards{grid-template-columns:1fr}}
+
+/* Fiche produit */
+.pdp{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:start}
+.gal{display:grid;gap:12px}
+.gal .main{aspect-ratio:4/5;border-radius:8px;overflow:hidden;background:var(--paper-2);max-width:100%}
+.gal .main img{width:100%;height:100%!important;object-fit:cover}
+.thumbs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.thumbs button{padding:0;border:0;border-radius:8px;overflow:hidden;aspect-ratio:1;cursor:pointer;background:var(--paper-2);box-shadow:inset 0 0 0 1px var(--line);opacity:.7;transition:opacity .2s}
+.thumbs button[aria-current="true"]{opacity:1;box-shadow:0 0 0 2px var(--bordeaux)}
+.thumbs img{width:100%;height:100%!important;object-fit:cover}
+.info{display:grid;gap:20px;position:sticky;top:90px}
+.info .big{font-size:clamp(70px,7.6vw,128px)}
+.info .pprice{font-family:var(--display);font-weight:600;font-size:30px}
+.info .pprice.soon{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--bordeaux)}
+.info .lead{font-size:17px;color:var(--ink-soft)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;text-decoration:none;font-size:14px;font-weight:500;box-shadow:inset 0 0 0 1.5px var(--line)}
+.chip[aria-current="true"]{box-shadow:inset 0 0 0 2px var(--ink);font-weight:600}
+.buy{display:grid;grid-template-columns:auto 1fr;gap:10px}
+.qty{display:inline-flex;align-items:center;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--line);min-height:48px}
+.qty button{width:44px;height:48px;border:0;background:none;font-size:20px;cursor:pointer;color:var(--ink)}
+.qty output{min-width:26px;text-align:center;font-weight:600}
+.perks{display:grid;gap:8px;font-size:14.5px;color:var(--ink-soft)}
+.perks span::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--bordeaux);margin-right:10px;vertical-align:middle}
+.acc details{border-top:1px solid var(--line)}
+.acc details:last-child{border-bottom:1px solid var(--line)}
+.acc summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;padding:16px 0;font-weight:600;font-size:15px}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::after{content:"+";font-size:22px;font-weight:400;transition:transform .3s}
+.acc details[open] summary::after{transform:rotate(45deg)}
+.acc .c{padding:0 0 18px;color:var(--ink-soft);font-size:15px;display:grid;gap:6px}
+.acc ul{margin:0;padding-left:18px;display:grid;gap:4px}
+@media (max-width:860px){.pdp{grid-template-columns:1fr}.info{position:static}}
+
+/* Panier */
+.drawer-back{position:fixed;inset:0;z-index:74;background:rgba(18,7,9,.45)}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:75;width:min(440px,100%);background:var(--paper);display:grid;grid-template-rows:auto 1fr auto;box-shadow:-30px 0 60px -30px rgba(18,7,9,.4);transform:translateX(102%);transition:transform .55s cubic-bezier(.2,.8,.2,1);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.drawer.open{transform:none}
+.drawer header{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;border-bottom:1px solid var(--line)}
+.drawer header h2{font-size:28px}
+.drawer .lines{overflow-y:auto;padding:10px 22px;display:grid;align-content:start;gap:0}
+.line{display:grid;grid-template-columns:76px 1fr auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.line img{width:76px;height:92px!important;object-fit:cover;border-radius:6px}
+.line .n{font-weight:600}
+.line .v{font-size:13px;color:var(--ink-soft)}
+.line .qty{min-height:38px;margin-top:6px}
+.line .qty button{width:34px;height:38px;font-size:17px}
+.line .rm{background:none;border:0;color:var(--ink-soft);font-size:12.5px;text-decoration:underline;cursor:pointer;align-self:start;padding:4px}
+.drawer .empty{padding:40px 0;display:grid;gap:16px;justify-items:start;color:var(--ink-soft)}
+.drawer footer{padding:18px 22px 22px;border-top:1px solid var(--line);display:grid;gap:12px}
+.drawer .tot{display:flex;justify-content:space-between;font-weight:600}
+.drawer .fine{font-size:13px;color:var(--ink-soft)}
+.x{width:40px;height:40px;border:0;background:transparent;color:var(--ink);cursor:pointer;font-size:28px;line-height:1}
+
+/* Fenêtre de commande */
 .modal{position:fixed;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
 .modal-back{position:absolute;inset:0;background:rgba(18,7,9,.72)}
-.sheet{position:relative;width:min(560px,100%);max-height:100%;overflow:auto;background:var(--paper);color:var(--ink);padding:clamp(26px,4.4vw,46px);display:grid;gap:22px}
+.sheet{position:relative;width:min(560px,100%);max-height:100%;overflow:auto;background:var(--paper);color:var(--ink);padding:clamp(24px,4.4vw,44px);display:grid;gap:20px;border-radius:24px}
 .sheet .big{font-size:clamp(64px,9vw,96px)}
-.x{position:absolute;top:12px;right:12px;width:40px;height:40px;border:0;background:transparent;color:var(--ink-soft);cursor:pointer;font-size:26px;line-height:1;font-weight:300}
-.choice{display:grid;grid-template-columns:1fr 1fr;gap:10px;border:0;margin:0;padding:0}
-.choice legend{margin-bottom:10px;padding:0;color:var(--ink-soft)}
-.opt{position:relative;display:grid;gap:3px;padding:14px 16px;border:1px solid var(--line);cursor:pointer;border-radius:14px}
-.opt input{position:absolute;opacity:0;pointer-events:none}
-.opt strong{font-family:var(--display);font-weight:400;font-size:20px}
-.opt span{font-size:12px;color:var(--ink-soft)}
-.opt:has(input:checked){border-color:var(--bordeaux);box-shadow:inset 0 0 0 1px var(--bordeaux)}
-.opt:has(input:focus-visible){outline:1.5px solid var(--bordeaux);outline-offset:2px}
+.sheet .x{position:absolute;top:12px;right:12px}
+.summary{display:grid;gap:8px;padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.6);box-shadow:inset 0 0 0 1px var(--line);font-size:15px}
+.summary div{display:flex;justify-content:space-between;gap:12px}
 .field{display:grid;gap:4px}
 .field label{color:var(--ink-soft)}
-.field input{min-height:48px;padding:0 2px;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--ink);font:300 17px var(--sans);border-radius:0}
+.field input{min-height:48px;padding:0 2px;border:0;border-bottom:1.5px solid var(--line);background:transparent;color:var(--ink);font:400 17px var(--sans);border-radius:0}
 .field input:focus{outline:none;border-bottom-color:var(--bordeaux)}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .sheet .consent{color:var(--ink-soft)}
-.sheet .status.ok{color:#3D6B4F}
+.sheet .status.ok{color:#2F5E41}
 .sheet .status.err{color:#9A1B3A}
-.note{font-size:12px;color:var(--ink-soft)}
+.note{font-size:13.5px;color:var(--ink-soft)}
 .done{display:grid;gap:16px}
 .done p{color:var(--ink-soft)}
-@media (max-width:480px){.choice,.two{grid-template-columns:1fr}}
+.paylinks{display:grid;gap:10px}
+@media (max-width:480px){.two{grid-template-columns:1fr}}
 
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{transition:none!important}}
 </style>
 
 <header class="top">
   <div class="bar gut">
-    <div class="blend">
-      <a class="brand" href="#accueil">Naillies.</a>
+    <div class="left">
+      <a class="brand" href="#site" data-home>Naillies.</a>
       <nav class="links tiny" aria-label="Sections">
         <a href="#teintes">Les teintes</a>
         <a href="#coffret">Le coffret</a>
         <a href="#kits">Les kits</a>
       </nav>
     </div>
-    <button class="pill" type="button" data-open="avec">Réserver <span class="ar" aria-hidden="true">↗</span></button>
+    <div class="right">
+      <button class="cart-btn" type="button" data-cart-open aria-label="Ouvrir le panier"><span class="t">Panier</span> <b data-cart-count>0</b></button>
+      <a class="pill" href="#boutique"><span class="t">Boutique</span> <span class="ar" aria-hidden="true">↗</span></a>
+    </div>
   </div>
 </header>
 
-<main id="accueil">
+<main id="main">
   <!-- 1. Ouverture : le flacon s'ouvre -->
   <section class="hero" aria-labelledby="h-hero">
+    <div class="hero-bg" aria-hidden="true"><i></i><b></b></div>
     <p class="eyebrow tiny gut">Naillies · Collection de Noël</p>
     <h1 class="big hero-title gut" id="h-hero">
       <span class="l"><span class="w">Le salon,</span></span>
@@ -238,14 +370,48 @@ h1,h2,h3{margin:0;font-weight:400}
       <span class="l"><span class="w">maison.</span></span>
     </h1>
     <div class="bottle" aria-hidden="true">
-      <div class="cap"><img src="img/bouchon.webp" alt="" width="376" height="488"><span class="stem"></span></div>
-      <div class="body"><img src="img/flacon.webp" alt="" width="376" height="414"></div>
+      <div class="cap">
+        <svg viewBox="0 0 200 262">
+          <defs>
+            <linearGradient id="gk" x1="0" x2="1"><stop offset="0" stop-color="#030203"/><stop offset=".14" stop-color="#2b2427"/><stop offset=".3" stop-color="#0d0a0b"/><stop offset=".62" stop-color="#050404"/><stop offset=".86" stop-color="#231c1f"/><stop offset="1" stop-color="#030203"/></linearGradient>
+            <linearGradient id="gs" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".32"/><stop offset="1" stop-color="#fff" stop-opacity=".04"/></linearGradient>
+          </defs>
+          <rect x="54" y="2" width="92" height="238" rx="8" fill="url(#gk)"/>
+          <rect x="54" y="2" width="92" height="7" rx="4" fill="#3a3236" opacity=".7"/>
+          <rect x="66" y="14" width="11" height="214" rx="5.5" fill="url(#gs)"/>
+          <rect x="131" y="18" width="4" height="206" rx="2" fill="#fff" opacity=".07"/>
+          <rect x="47" y="232" width="106" height="28" rx="6" fill="url(#gk)"/>
+          <rect x="47" y="232" width="106" height="3" rx="1.5" fill="#fff" opacity=".12"/>
+        </svg>
+        <span class="stem"></span>
+      </div>
+      <div class="body">
+        <svg viewBox="0 0 200 232">
+          <defs>
+            <linearGradient id="gb" x1="0" x2="1"><stop offset="0" stop-color="#030203"/><stop offset=".1" stop-color="#2a2326"/><stop offset=".24" stop-color="#0c090a"/><stop offset=".7" stop-color="#060505"/><stop offset=".9" stop-color="#211a1d"/><stop offset="1" stop-color="#030203"/></linearGradient>
+            <radialGradient id="gh" cx=".28" cy=".12" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+          </defs>
+          <rect x="64" y="0" width="72" height="16" fill="#0b0809"/>
+          <rect x="8" y="10" width="184" height="216" rx="44" fill="url(#gb)"/>
+          <rect x="8" y="10" width="184" height="216" rx="44" fill="url(#gh)"/>
+          <rect x="21" y="44" width="12" height="150" rx="6" fill="#fff" opacity=".13"/>
+          <rect x="170" y="56" width="4" height="120" rx="2" fill="#fff" opacity=".06"/>
+          <text x="100" y="98" text-anchor="middle" font-family="Bodoni Moda, Georgia, serif" font-size="46" font-weight="500" fill="#F4EFEA">N</text>
+          <circle cx="119" cy="95" r="3.6" fill="#F4EFEA"/>
+          <text x="100" y="116" text-anchor="middle" font-family="Jost, sans-serif" font-size="6.6" letter-spacing="1.7" fill="#CFC6C9">NAIL ART &amp; MANUCURE</text>
+          <text x="100" y="142" text-anchor="middle" font-family="Jost, Arial, sans-serif" font-size="17" font-weight="600" letter-spacing=".4" fill="#FFFFFF">GEL POLISH</text>
+          <rect x="56" y="151" width="88" height="15" rx="7.5" fill="#ECE5DF"/>
+          <text x="100" y="161.6" text-anchor="middle" font-family="Jost, Arial, sans-serif" font-size="7.4" font-weight="600" letter-spacing=".5" fill="#2A2226">HEMA &amp; TPO FREE</text>
+          <text x="100" y="191" text-anchor="middle" font-family="Jost, Arial, sans-serif" font-size="10" fill="#E9E2DE">8ml</text>
+        </svg>
+      </div>
+      <span class="shadow"></span>
     </div>
-    <div class="meta gut">
+    <div class="meta glass" style="right:max(20px,4vw)">
       <span class="tiny"><b>Kit débutante</b></span>
       <p>Tout pour apprendre la manucure semi-permanente, pas à pas, depuis chez vous.</p>
     </div>
-    <div class="cta gut"><button class="pill" type="button" data-open="avec">Trouver mon coffret <span class="ar" aria-hidden="true">↗</span></button></div>
+    <div class="cta gut"><a class="pill" href="#boutique">Trouver mon coffret <span class="ar" aria-hidden="true">↗</span></a></div>
     <p class="scroll tiny gut">Défiler ↓</p>
   </section>
 
@@ -281,7 +447,7 @@ h1,h2,h3{margin:0;font-weight:400}
     </div>
   </section>
 
-  <!-- 3. Nuit : un ruban champagne, puis un cercle s'ouvre sur la photo -->
+  <!-- 3. Nuit : ruban champagne, puis un cercle s'ouvre sur la photo -->
   <section class="night" aria-labelledby="h-night">
     <div class="stage gut">
       <h2 class="big" id="h-night">
@@ -301,33 +467,28 @@ h1,h2,h3{margin:0;font-weight:400}
       </svg>
       <div class="reveal"><img src="img/parenthese.webp" alt="Des mains aux ongles amande bordeaux autour d'une tasse fumante" width="941" height="1022"></div>
       <div class="cap-txt">
-        <span class="t">Offrez-vous une parenthèse.</span>
+        <span class="t serif">Offrez-vous une parenthèse.</span>
         <p>Une soirée tranquille, un plaid, et des ongles faits par vous.</p>
       </div>
     </div>
   </section>
 
-  <!-- 4. Bandeau photo -->
-  <div class="band" aria-hidden="true"><img src="img/flatlay.webp" alt="" width="1254" height="1254"></div>
-
-  <!-- 5. Le coffret -->
-  <section class="menu gut" id="coffret" aria-labelledby="h-menu">
-    <div class="menu-head">
-      <h2 class="big" id="h-menu"><span class="l"><span class="w">Le coffret.</span></span></h2>
-      <p>De la préparation de l'ongle à la touche dorée finale, chaque élément de la pose est déjà dans la boîte.</p>
+  <!-- 4. Le coffret, en cartes vitrées -->
+  <section class="box" id="coffret" aria-labelledby="h-box">
+    <div class="box-bg" aria-hidden="true"></div>
+    <div class="in gut">
+      <div class="box-head">
+        <h2 class="big" id="h-box"><span class="l"><span class="w">Le coffret.</span></span></h2>
+        <p class="glass">De la préparation de l'ongle à la touche dorée finale, tout est déjà dans la boîte.</p>
+      </div>
+      <div class="gcards" id="gcards-home"></div>
+      <div class="shop-cta">
+        <a class="pill" href="#boutique">Voir la boutique <span class="ar" aria-hidden="true">↗</span></a>
+      </div>
     </div>
-    <ul class="menu-list">
-      <li class="menu-row" data-crop="700,128,460,354"><span class="big"><span class="l"><span class="w">Lampe UV LED</span></span></span><span class="d">SUNmini<em>Incluse</em></span></li>
-      <li class="menu-row" data-crop="150,445,390,300"><span class="big"><span class="l"><span class="w">Vernis gel</span></span></span><span class="d">4 teintes<em>4 × 8 ml</em></span></li>
-      <li class="menu-row" data-crop="620,450,470,330"><span class="big"><span class="l"><span class="w">Primer &amp; base</span></span></span><span class="d">Acid Free · Low Acid Rubber<em>2 × 8 ml</em></span></li>
-      <li class="menu-row" data-crop="830,450,290,330"><span class="big"><span class="l"><span class="w">Top coats</span></span></span><span class="d">Diamond Shine · Golden Foil<em>2 × 8 ml</em></span></li>
-      <li class="menu-row" data-crop="840,760,320,330"><span class="big"><span class="l"><span class="w">Ponceuse</span></span></span><span class="d">Chargeur inclus<em>6 embouts · 6 bagues</em></span></li>
-      <li class="menu-row" data-crop="75,740,555,427"><span class="big"><span class="l"><span class="w">Capsules amande</span></span></span><span class="d">12 tailles · Full cover<em>120 pièces · kit avec capsules</em></span></li>
-      <li class="menu-row" data-crop="260,1060,620,190"><span class="big"><span class="l"><span class="w">Lime &amp; brosse</span></span></span><span class="d">Grain 100/180<em>Incluses</em></span></li>
-    </ul>
   </section>
 
-  <!-- 6. Les kits -->
+  <!-- 5. Les kits -->
   <section class="sets" id="kits" aria-labelledby="h-sets">
     <div class="wrapin">
       <div class="sets-head gut">
@@ -340,35 +501,45 @@ h1,h2,h3{margin:0;font-weight:400}
       <div class="track-wrap gut">
         <div class="track">
           <article class="card">
-            <div class="ph"><img src="img/naturels.webp" alt="Ongles naturels courts, vernis bordeaux" width="466" height="1231" style="object-position:50% 0"></div>
-            <div class="row"><span class="k">Ongles naturels</span><span class="price" data-price="sans">Prix à l'ouverture</span></div>
-            <h3>Kit <i>sans</i> capsules</h3>
+            <a class="go" href="#kit-sans-capsules">
+              <div class="ph"><img src="img/naturels.webp" alt="Ongles naturels courts, vernis bordeaux" width="466" height="1231" style="object-position:50% 0"><span class="see glass">Voir le kit</span></div>
+              <div class="row"><span class="k">Ongles naturels</span><span class="price" data-price="sans">Prix à l'ouverture</span></div>
+              <h3 class="serif">Kit <i>sans</i> capsules</h3>
+            </a>
             <p class="s">Le vernis semi-permanent, directement sur vos ongles.</p>
-            <button class="pill" type="button" data-open="sans">Réserver <span class="ar" aria-hidden="true">↗</span></button>
+            <button class="pill" type="button" data-add="sans">Ajouter au panier <span class="ar" aria-hidden="true">+</span></button>
           </article>
           <article class="card">
-            <div class="ph"><img src="img/americaine.webp" alt="Ongles longs en pose américaine amande, vernis bordeaux" width="466" height="1231" style="object-position:50% 0"></div>
-            <div class="row"><span class="k">Pose américaine</span><span class="price" data-price="avec">Prix à l'ouverture</span></div>
-            <h3>Kit <i>avec</i> capsules</h3>
+            <a class="go" href="#kit-avec-capsules">
+              <div class="ph"><img src="img/americaine.webp" alt="Ongles longs en pose américaine amande, vernis bordeaux" width="466" height="1231" style="object-position:50% 0"><span class="see glass">Voir le kit</span></div>
+              <div class="row"><span class="k">Pose américaine</span><span class="price" data-price="avec">Prix à l'ouverture</span></div>
+              <h3 class="serif">Kit <i>avec</i> capsules</h3>
+            </a>
             <p class="s">Avec 120 capsules soft gel amande, en 12 tailles.</p>
-            <button class="pill" type="button" data-open="avec">Réserver <span class="ar" aria-hidden="true">↗</span></button>
+            <button class="pill" type="button" data-add="avec">Ajouter au panier <span class="ar" aria-hidden="true">+</span></button>
           </article>
           <article class="card tall">
-            <div class="ph"><img src="img/teintes.webp" alt="Les quatre vernis et leurs teintes" width="941" height="1201"></div>
-            <div class="row"><span class="k">Dans les deux kits</span></div>
-            <h3>Les <i>teintes</i></h3>
+            <a class="go" href="#boutique">
+              <div class="ph"><img src="img/teintes.webp" alt="Les quatre vernis et leurs teintes" width="941" height="1201"><span class="see glass">Voir la boutique</span></div>
+              <div class="row"><span class="k">Dans les deux kits</span></div>
+              <h3 class="serif">Les <i>teintes</i></h3>
+            </a>
             <p class="s">Mirage 03, Mirage 07, GR010 et Red Bean 01.</p>
           </article>
           <article class="card">
-            <div class="ph"><img src="img/coffret.webp" alt="Le coffret bordeaux Naillies et son ruban" width="1254" height="1254"></div>
-            <div class="row"><span class="k">Prêt à offrir</span></div>
-            <h3>Le <i>coffret</i></h3>
+            <a class="go" href="#boutique">
+              <div class="ph"><img src="img/coffret.webp" alt="Le coffret bordeaux Naillies et son ruban" width="1254" height="1254"><span class="see glass">Voir la boutique</span></div>
+              <div class="row"><span class="k">Prêt à offrir</span></div>
+              <h3 class="serif">Le <i>coffret</i></h3>
+            </a>
             <p class="s">La collection de Noël, pose américaine amande.</p>
           </article>
           <article class="card tall">
-            <div class="ph"><img src="img/parenthese.webp" alt="Mains vernies de bordeaux autour d'une tasse" width="941" height="1022"></div>
-            <div class="row"><span class="k">Le résultat</span></div>
-            <h3>Votre <i>signature</i></h3>
+            <a class="go" href="#boutique">
+              <div class="ph"><img src="img/parenthese.webp" alt="Mains vernies de bordeaux autour d'une tasse" width="941" height="1022"><span class="see glass">Voir la boutique</span></div>
+              <div class="row"><span class="k">Le résultat</span></div>
+              <h3 class="serif">Votre <i>signature</i></h3>
+            </a>
             <p class="s">Une pose de salon, faite par vous.</p>
           </article>
         </div>
@@ -376,7 +547,7 @@ h1,h2,h3{margin:0;font-weight:400}
     </div>
   </section>
 
-  <!-- 7. Final -->
+  <!-- 6. Final -->
   <section class="final" id="reserver" aria-labelledby="h-final">
     <div class="wrapin gut">
       <h2 class="big" id="h-final">
@@ -385,10 +556,11 @@ h1,h2,h3{margin:0;font-weight:400}
       </h2>
       <span class="rule" aria-hidden="true"></span>
       <span class="ast" aria-hidden="true">*</span>
-      <p class="lead">Pas à pas, depuis chez vous.</p>
-      <p class="sub">La prévente est ouverte. Réservez votre coffret, puis réglez en ligne sur une page sécurisée Stripe. Nous ne voyons jamais vos coordonnées bancaires.</p>
+      <p class="lead serif">Pas à pas, depuis chez vous.</p>
+      <p class="sub">La prévente est ouverte. Choisissez votre kit dans la boutique, puis réglez en ligne sur une page sécurisée Stripe. Nous ne voyons jamais vos coordonnées bancaires.</p>
       <div class="acts">
-        <button class="pill light" type="button" data-open="avec">Réserver mon coffret <span class="ar" aria-hidden="true">↗</span></button>
+        <a class="pill light" href="#boutique">Voir la boutique <span class="ar" aria-hidden="true">↗</span></a>
+        <button class="pill ghost" type="button" data-cart-open>Mon panier <span class="ar" aria-hidden="true">→</span></button>
       </div>
       <form class="nl" id="nl-form" novalidate>
         <span class="tiny" style="color:var(--night-muted)">La lettre Naillies</span>
@@ -408,7 +580,7 @@ h1,h2,h3{margin:0;font-weight:400}
             <p><b>Éditeur du site :</b> [nom ou raison sociale, SIRET, adresse et e-mail de contact à compléter].</p>
             <p><b>Rétractation :</b> 14 jours à compter de la réception (article L221-18 du Code de la consommation), sauf pour les biens descellés après livraison qui ne peuvent être renvoyés pour des raisons d'hygiène (article L221-28).</p>
             <p><b>Livraison :</b> la date de livraison est indiquée avant tout paiement.</p>
-            <p><b>Données personnelles :</b> votre prénom et votre e-mail servent uniquement à suivre votre réservation et, si vous l'avez accepté, à vous envoyer la lettre. Accès, correction ou suppression sur simple demande à [e-mail à compléter].</p>
+            <p><b>Données personnelles :</b> votre prénom et votre e-mail servent uniquement à suivre votre commande et, si vous l'avez accepté, à vous envoyer la lettre. Accès, correction ou suppression sur simple demande à [e-mail à compléter].</p>
             <p><b>Paiement :</b> traité par Stripe. Naillies ne conserve aucune donnée bancaire.</p>
           </div>
         </details>
@@ -417,27 +589,44 @@ h1,h2,h3{margin:0;font-weight:400}
   </section>
 </main>
 
-<div class="preview" id="preview" aria-hidden="true"></div>
+<!-- Boutique et fiches produits -->
+<div class="view" id="view" hidden data-lenis-prevent role="region" aria-label="Boutique">
+  <div class="view-bar gut">
+    <a class="back" href="#site">← Retour au site</a>
+    <a class="brand" href="#site">Naillies.</a>
+    <button class="cart-btn" type="button" data-cart-open aria-label="Ouvrir le panier"><span class="t">Panier</span> <b data-cart-count>0</b></button>
+  </div>
+  <div class="view-body gut" id="view-body"></div>
+</div>
 
+<!-- Panier -->
+<div class="drawer-back" id="drawer-back" hidden></div>
+<aside class="drawer" id="drawer" aria-label="Panier" aria-hidden="true" data-lenis-prevent>
+  <header><h2 class="serif">Votre panier</h2><button class="x" type="button" id="drawer-close" aria-label="Fermer le panier">×</button></header>
+  <div class="lines" id="lines"></div>
+  <footer id="drawer-foot">
+    <div class="tot"><span>Sous-total</span><span id="subtotal">—</span></div>
+    <p class="fine" id="fine">Prévente : aucun paiement n'est débité à cette étape. La date de livraison vous est donnée avant le paiement.</p>
+    <button class="pill block" type="button" id="checkout">Commander <span class="ar" aria-hidden="true">→</span></button>
+  </footer>
+</aside>
+
+<!-- Fenêtre de commande -->
 <div class="modal" id="modal" hidden>
   <div class="modal-back" data-close></div>
-  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="m-title">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="m-title" data-lenis-prevent>
     <button class="x" type="button" data-close aria-label="Fermer">×</button>
-    <form id="r-form" novalidate style="display:grid;gap:20px">
+    <form id="r-form" novalidate style="display:grid;gap:18px">
       <span class="tiny" style="color:var(--ink-soft)">Prévente · Collection de Noël</span>
-      <h2 class="big" id="m-title"><span class="l"><span class="w">Réserver.</span></span></h2>
-      <fieldset class="choice">
-        <legend class="tiny">Votre kit</legend>
-        <label class="opt"><input type="radio" name="kit" value="sans" id="kit-sans"><strong>Sans capsules</strong><span data-price-mini="sans">Ongles naturels</span></label>
-        <label class="opt"><input type="radio" name="kit" value="avec" id="kit-avec" checked><strong>Avec capsules</strong><span data-price-mini="avec">Pose américaine</span></label>
-      </fieldset>
+      <h2 class="big" id="m-title"><span class="l"><span class="w">Commander.</span></span></h2>
+      <div class="summary" id="summary"></div>
       <div class="two">
         <div class="field"><label class="tiny" for="r-prenom">Prénom</label><input id="r-prenom" name="prenom" autocomplete="given-name" required></div>
         <div class="field"><label class="tiny" for="r-email">E-mail</label><input id="r-email" name="email" type="email" autocomplete="email" required></div>
       </div>
-      <label class="consent" for="r-ok"><input id="r-ok" type="checkbox" required><span>J'accepte que Naillies utilise mon prénom et mon e-mail pour me recontacter au sujet de ma réservation.</span></label>
+      <label class="consent" for="r-ok"><input id="r-ok" type="checkbox" required><span>J'accepte que Naillies utilise mon prénom et mon e-mail pour me recontacter au sujet de ma commande.</span></label>
       <label class="consent" for="r-nl"><input id="r-nl" type="checkbox"><span>Je veux aussi recevoir la lettre Naillies.</span></label>
-      <button class="pill" type="submit" id="r-submit" style="justify-self:start">Valider ma réservation <span class="ar" aria-hidden="true">↗</span></button>
+      <button class="pill block" type="submit" id="r-submit">Valider ma commande <span class="ar" aria-hidden="true">→</span></button>
       <p class="note">Aucun paiement à cette étape.</p>
       <p class="status" id="r-status" role="status" aria-live="polite"></p>
     </form>
@@ -445,127 +634,288 @@ h1,h2,h3{margin:0;font-weight:400}
       <span class="tiny" style="color:var(--ink-soft)">C'est noté</span>
       <h2 class="big" id="d-title" tabindex="-1"><span class="l"><span class="w">Merci.</span></span></h2>
       <p id="d-text"></p>
-      <a class="pill" id="d-pay" href="#" target="_blank" rel="noopener" hidden style="justify-self:start">Payer avec Stripe <span class="ar" aria-hidden="true">↗</span></a>
-      <button class="pill light" type="button" data-close style="justify-self:start;border:1px solid var(--line)">Revenir au site <span class="ar" aria-hidden="true">←</span></button>
+      <div class="paylinks" id="paylinks"></div>
+      <button class="pill ghost" type="button" data-close style="justify-self:start">Revenir au site <span class="ar" aria-hidden="true">←</span></button>
     </div>
   </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
 /* Réglages : collez ici vos liens de paiement Stripe (Payment Links) et vos prix en euros. */
 const CONFIG = {
   stripe: { avec: "", sans: "" },
   prix:   { avec: null, sans: null }
 };
-const KITS = { avec: "kit avec capsules", sans: "kit sans capsules" };
+
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const S = 1254;
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const PRODUCTS = {
+  avec: { slug: "kit-avec-capsules", name: "Kit avec capsules", short: "Kit avec", tag: "Pose américaine",
+    lead: "Tout pour apprendre la manucure semi-permanente et la pose américaine amande, de A à Z, depuis chez vous.",
+    imgs: ["americaine", "flatlay", "coffret", "teintes", "parenthese"], other: "sans" },
+  sans: { slug: "kit-sans-capsules", name: "Kit sans capsules", short: "Kit sans", tag: "Ongles naturels",
+    lead: "Tout pour poser le vernis semi-permanent directement sur vos ongles naturels, pas à pas.",
+    imgs: ["naturels", "flatlay", "coffret", "teintes", "parenthese"], other: "avec" }
+};
+const IMG_ALT = { americaine: "Ongles longs en pose américaine amande, vernis bordeaux", naturels: "Ongles naturels courts, vernis bordeaux", flatlay: "Le contenu complet du coffret, posé à plat", coffret: "Le coffret bordeaux Naillies et son ruban", teintes: "Les quatre vernis et leurs teintes", parenthese: "Mains vernies de bordeaux autour d'une tasse" };
+const ITEMS = [
+  { n: "Lampe UV LED", d: "Mini lampe SUNmini pour faire durcir chaque couche.", c: "700,128,460,354", q: "× 1" },
+  { n: "Vernis gel", d: "Mirage 03, Mirage 07, GR010 et Red Bean 01.", c: "150,445,390,300", q: "4 × 8 ml" },
+  { n: "Primer et base", d: "Acid Free Primer et Low Acid Rubber Base Coat.", c: "630,450,440,330", q: "2 × 8 ml" },
+  { n: "Top coats", d: "Diamond Shine No Wipe et Golden Foil, pour un reflet doré.", c: "800,450,440,330", q: "2 × 8 ml" },
+  { n: "Ponceuse", d: "Avec son chargeur, 6 embouts et 6 bagues de ponçage.", c: "800,770,440,330", q: "× 1" },
+  { n: "Brosse et lime", d: "Une brosse à poussière et une lime 100/180.", c: "600,780,300,225", q: "× 2" },
+  { n: "Capsules amande", d: "120 capsules soft gel, 12 tailles, couverture totale.", c: "75,740,555,427", q: "Kit avec capsules", only: "avec" }
+];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+function cropStyle(c) {
+  const [x, y, w, h] = c.split(",").map(Number);
+  return `background-size:${S / w * 100}% auto;background-position:${x / (S - w) * 100}% ${y / (S - h) * 100}%;aspect-ratio:${w}/${h}`;
+}
+function gcardsHTML(filter) {
+  return ITEMS.filter(i => !filter || !i.only || i.only === filter).map((i, k) => `
+    <article class="gcard glass${k === 0 && !filter ? " feature" : ""}">
+      <div class="ph"><div class="crop" style="${cropStyle(i.c)}" role="img" aria-label="${esc(i.n)}"></div></div>
+      <div class="tx"><h3 class="serif">${esc(i.n)}</h3><p>${esc(i.d)}</p></div>
+      <span class="q">${esc(i.q)}</span>
+    </article>`).join("");
+}
+$("#gcards-home").innerHTML = gcardsHTML();
 
 /* Prix */
 const eur = n => new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(n);
-const stripeLink = k => (typeof CONFIG.stripe[k] === "string" && CONFIG.stripe[k].startsWith("https://")) ? CONFIG.stripe[k] : "";
-Object.keys(KITS).forEach(k => {
-  const p = CONFIG.prix[k];
-  if (typeof p === "number") {
-    $$(`[data-price="${k}"]`).forEach(el => { el.textContent = eur(p); el.classList.add("num"); });
-    $$(`[data-price-mini="${k}"]`).forEach(el => { el.textContent = eur(p); });
-  }
-});
+const priceOf = id => (typeof CONFIG.prix[id] === "number" ? CONFIG.prix[id] : null);
+const priceTxt = id => priceOf(id) === null ? "Prix à l'ouverture" : eur(priceOf(id));
+const stripeLink = id => (typeof CONFIG.stripe[id] === "string" && CONFIG.stripe[id].startsWith("https://")) ? CONFIG.stripe[id] : "";
+function paintPrices(root = document) {
+  $$("[data-price]", root).forEach(el => { const id = el.dataset.price; el.textContent = priceTxt(id); el.classList.toggle("num", priceOf(id) !== null); });
+}
+paintPrices();
 
-/* Aperçu photo qui suit la souris sur la liste du coffret */
-(() => {
-  const pv = $("#preview"); const S = 1254;
-  if (!pv || !matchMedia("(hover:hover)").matches) return;
-  let x = 0, y = 0, cx = 0, cy = 0, raf = 0;
-  const loop = () => { cx += (x - cx) * .16; cy += (y - cy) * .16; pv.style.left = cx + "px"; pv.style.top = cy + "px"; raf = requestAnimationFrame(loop); };
-  $$(".menu-row").forEach(row => {
-    row.addEventListener("mouseenter", e => {
-      const [cxp, cyp, w, h] = row.dataset.crop.split(",").map(Number);
-      pv.style.aspectRatio = w + " / " + h;
-      pv.style.backgroundSize = (S / w * 100) + "% auto";
-      pv.style.backgroundPosition = (cxp / (S - w) * 100) + "% " + (cyp / (S - h) * 100) + "%";
-      x = cx = e.clientX; y = cy = e.clientY; pv.classList.add("on");
-      if (!raf) loop();
+/* Panier, gardé dans ce navigateur */
+const CART_KEY = "naillies-panier";
+let cart = [];
+try { const raw = JSON.parse(localStorage.getItem(CART_KEY) || "[]"); if (Array.isArray(raw)) cart = raw.filter(l => PRODUCTS[l.id] && l.q > 0); } catch (e) { cart = []; }
+function saveCart() { try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) {} }
+function addToCart(id, q = 1) { const l = cart.find(x => x.id === id); if (l) l.q = Math.min(9, l.q + q); else cart.push({ id, q: Math.min(9, q) }); saveCart(); renderCart(); }
+function setQty(id, q) { const l = cart.find(x => x.id === id); if (!l) return; l.q = Math.max(0, Math.min(9, q)); cart = cart.filter(x => x.q > 0); saveCart(); renderCart(); }
+function cartCount() { return cart.reduce((s, l) => s + l.q, 0); }
+function renderCart() {
+  $$("[data-cart-count]").forEach(b => b.textContent = cartCount());
+  const lines = $("#lines");
+  if (!cart.length) {
+    lines.innerHTML = `<div class="empty"><p>Votre panier est vide.</p><a class="pill" href="#boutique" data-close-drawer>Voir la boutique <span class="ar" aria-hidden="true">↗</span></a></div>`;
+    $("#drawer-foot").hidden = true; return;
+  }
+  $("#drawer-foot").hidden = false;
+  lines.innerHTML = cart.map(l => { const p = PRODUCTS[l.id]; return `
+    <div class="line">
+      <img src="img/${p.imgs[0]}.webp" alt="" width="76" height="92" style="object-position:50% 0">
+      <div><div class="n">${esc(p.name)}</div><div class="v">${esc(p.tag)} · ${esc(priceTxt(l.id))}</div>
+        <div class="qty" role="group" aria-label="Quantité"><button type="button" data-q="${l.id}" data-d="-1" aria-label="Retirer un">−</button><output>${l.q}</output><button type="button" data-q="${l.id}" data-d="1" aria-label="Ajouter un">+</button></div></div>
+      <button class="rm" type="button" data-rm="${l.id}">Retirer</button>
+    </div>`; }).join("");
+  const allPriced = cart.every(l => priceOf(l.id) !== null);
+  $("#subtotal").textContent = allPriced ? eur(cart.reduce((s, l) => s + priceOf(l.id) * l.q, 0)) : "Prix à l'ouverture";
+}
+renderCart();
+
+const drawer = $("#drawer"), dback = $("#drawer-back");
+let lenis = null;
+function lock(on) { document.documentElement.style.overflow = on ? "hidden" : ""; if (lenis) on ? lenis.stop() : lenis.start(); }
+function openDrawer() { dback.hidden = false; drawer.classList.add("open"); drawer.setAttribute("aria-hidden", "false"); lock(true); setTimeout(() => $("#drawer-close").focus(), 50); }
+function closeDrawer() { drawer.classList.remove("open"); drawer.setAttribute("aria-hidden", "true"); dback.hidden = true; if (view.hidden && modal.hidden) lock(false); }
+document.addEventListener("click", e => {
+  const t = e.target;
+  if (t.closest("[data-cart-open]")) { openDrawer(); return; }
+  if (t.closest("#drawer-close") || t === dback || t.closest("[data-close-drawer]")) { closeDrawer(); }
+  const add = t.closest("[data-add]"); if (add) { addToCart(add.dataset.add, Number(add.dataset.qty || 1)); openDrawer(); return; }
+  const q = t.closest("[data-q]"); if (q) { const l = cart.find(x => x.id === q.dataset.q); if (l) setQty(l.id, l.q + Number(q.dataset.d)); return; }
+  const rm = t.closest("[data-rm]"); if (rm) { setQty(rm.dataset.rm, 0); return; }
+});
+$("#checkout").addEventListener("click", () => { closeDrawer(); openCheckout(); });
+
+/* Boutique : routes #boutique, #kit-avec-capsules, #kit-sans-capsules */
+const view = $("#view"), vbody = $("#view-body");
+const SLUGS = { "kit-avec-capsules": "avec", "kit-sans-capsules": "sans" };
+function shopHTML() {
+  const card = id => { const p = PRODUCTS[id]; return `
+    <article class="pcard">
+      <a class="go" href="#${p.slug}">
+        <div class="ph"><span class="badge glass">${esc(p.tag)}</span><img src="img/${p.imgs[0]}.webp" alt="${esc(IMG_ALT[p.imgs[0]])}" style="object-position:50% 0"><img class="alt" src="img/flatlay.webp" alt=""></div>
+        <div class="row"><h3 class="serif">${esc(p.name)}</h3><span class="price" data-price="${id}"></span></div>
+        <p class="s">${esc(p.lead)}</p>
+      </a>
+      <div class="acts"><button class="pill" type="button" data-add="${id}">Ajouter au panier <span class="ar" aria-hidden="true">+</span></button><a class="pill ghost" href="#${p.slug}">Voir le kit <span class="ar" aria-hidden="true">↗</span></a></div>
+    </article>`; };
+  return `
+    <p class="crumbs tiny"><a href="#site">Accueil</a> / Boutique</p>
+    <div class="shop-head"><h1 class="big" tabindex="-1" id="v-title"><span class="l"><span class="w">La boutique.</span></span></h1>
+      <p>Prévente de la collection de Noël. Deux kits, le même coffret : seule la boîte de capsules change.</p></div>
+    <div class="pgrid">${card("avec")}${card("sans")}</div>
+    <div class="assure">
+      <div><b>Sans HEMA ni TPO</b><span>Mention portée sur chaque flacon.</span></div>
+      <div><b>Paiement Stripe</b><span>Par carte, sur une page sécurisée.</span></div>
+      <div><b>Livraison annoncée</b><span>Date donnée avant tout paiement.</span></div>
+      <div><b>14 jours</b><span>Pour changer d'avis après réception.</span></div>
+    </div>
+    <section class="inview"><h2 class="serif">Dans chaque coffret</h2><div class="gcards">${gcardsHTML("tous")}</div></section>`;
+}
+function productHTML(id) {
+  const p = PRODUCTS[id], o = PRODUCTS[p.other];
+  const contents = ["Mini lampe UV LED SUNmini", "4 vernis gel de 8 ml : Mirage 03, Mirage 07, GR010, Red Bean 01", "Acid Free Primer et Low Acid Rubber Base Coat, 8 ml chacun", "Diamond Shine No Wipe Top Coat et Golden Foil Top Coat, 8 ml chacun", "Ponceuse électrique avec chargeur, 6 embouts et 6 bagues de ponçage", "Brosse et lime 100/180"];
+  if (id === "avec") contents.push("120 capsules soft gel amande, 12 tailles, couverture totale");
+  return `
+    <p class="crumbs tiny"><a href="#site">Accueil</a> / <a href="#boutique">Boutique</a> / ${esc(p.name)}</p>
+    <div class="pdp">
+      <div class="gal">
+        <div class="main"><img id="g-main" src="img/${p.imgs[0]}.webp" alt="${esc(IMG_ALT[p.imgs[0]])}" style="object-position:50% 0"></div>
+        <div class="thumbs">${p.imgs.map((im, k) => `<button type="button" data-img="${im}" aria-current="${k === 0}" aria-label="Voir : ${esc(IMG_ALT[im])}"><img src="img/${im}.webp" alt="" style="object-position:50% 0"></button>`).join("")}</div>
+      </div>
+      <div class="info">
+        <span class="tiny" style="color:var(--bordeaux)">${esc(p.tag)} · Prévente</span>
+        <h1 class="big" tabindex="-1" id="v-title"><span class="l"><span class="w">${esc(p.short)}</span></span><span class="l"><span class="w"><em>capsules.</em></span></span></h1>
+        <span class="pprice${priceOf(id) === null ? " soon" : ""}">${esc(priceTxt(id))}</span>
+        <p class="lead">${esc(p.lead)}</p>
+        <div class="chips" role="group" aria-label="Version du kit">
+          <a class="chip" href="#kit-avec-capsules" aria-current="${id === "avec"}">Avec capsules</a>
+          <a class="chip" href="#kit-sans-capsules" aria-current="${id === "sans"}">Sans capsules</a>
+        </div>
+        <div class="buy">
+          <div class="qty" role="group" aria-label="Quantité"><button type="button" id="pq-m" aria-label="Moins">−</button><output id="pq">1</output><button type="button" id="pq-p" aria-label="Plus">+</button></div>
+          <button class="pill block" type="button" id="p-add" data-add="${id}" data-qty="1">Ajouter au panier <span class="ar" aria-hidden="true">+</span></button>
+        </div>
+        <div class="perks"><span>Quatre teintes d'hiver incluses</span><span>Sans HEMA ni TPO</span><span>Paiement sécurisé par Stripe</span></div>
+        <div class="acc">
+          <details open><summary>Dans le coffret</summary><div class="c"><ul>${contents.map(c => `<li>${esc(c)}</li>`).join("")}</ul></div></details>
+          <details><summary>Les teintes</summary><div class="c"><p>Mirage 03, rouge pailleté. Mirage 07, vert sapin pailleté. GR010, bleu ardoise. Red Bean 01, framboise.</p></div></details>
+          <details><summary>Livraison et retours</summary><div class="c"><p>La date de livraison vous est donnée avant tout paiement. Vous avez 14 jours après réception pour vous rétracter, sauf pour les produits descellés qui ne peuvent pas être renvoyés pour des raisons d'hygiène.</p></div></details>
+          <details><summary>Paiement</summary><div class="c"><p>Par carte bancaire, sur une page sécurisée Stripe. Naillies n'a jamais accès à vos coordonnées bancaires.</p></div></details>
+        </div>
+      </div>
+    </div>
+    <section class="inview"><h2 class="serif">Dans ce kit</h2><div class="gcards">${gcardsHTML(id)}</div></section>
+    <section class="inview"><h2 class="serif">L'autre version</h2>
+      <div class="pgrid"><article class="pcard"><a class="go" href="#${o.slug}"><div class="ph" style="aspect-ratio:16/9"><span class="badge glass">${esc(o.tag)}</span><img src="img/${o.imgs[0]}.webp" alt="${esc(IMG_ALT[o.imgs[0]])}" style="object-position:50% 20%"></div><div class="row"><h3 class="serif">${esc(o.name)}</h3><span class="price" data-price="${p.other}"></span></div></a></article></div>
+    </section>`;
+}
+let lastFocus = null;
+function openView(name) {
+  if (view.hidden) lastFocus = document.activeElement;
+  closeDrawer();
+  vbody.innerHTML = name === "boutique" ? shopHTML() : productHTML(SLUGS[name]);
+  paintPrices(vbody);
+  view.hidden = false; lock(true); view.scrollTop = 0;
+  const t = $("#v-title"); if (t) t.focus({ preventScroll: true });
+  if (window.gsap && !reduce) gsap.from(vbody.children, { y: 30, autoAlpha: 0, duration: .8, ease: "expo.out", stagger: .06 });
+  if (SLUGS[name]) {
+    let q = 1; const out = $("#pq"), add = $("#p-add");
+    const upd = () => { out.textContent = q; add.dataset.qty = q; };
+    $("#pq-m").onclick = () => { q = Math.max(1, q - 1); upd(); };
+    $("#pq-p").onclick = () => { q = Math.min(9, q + 1); upd(); };
+    $$(".thumbs button", vbody).forEach(b => b.onclick = () => {
+      const m = $("#g-main"); m.src = "img/" + b.dataset.img + ".webp"; m.alt = IMG_ALT[b.dataset.img];
+      $$(".thumbs button", vbody).forEach(x => x.setAttribute("aria-current", String(x === b)));
     });
-    row.addEventListener("mousemove", e => { x = e.clientX; y = e.clientY; });
-    row.addEventListener("mouseleave", () => { pv.classList.remove("on"); cancelAnimationFrame(raf); raf = 0; });
-  });
-})();
+  }
+}
+function closeView() {
+  if (view.hidden) return;
+  view.hidden = true; vbody.innerHTML = "";
+  if (drawer.getAttribute("aria-hidden") === "true" && modal.hidden) lock(false);
+  if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+}
+function route() {
+  const h = decodeURIComponent(location.hash.slice(1));
+  if (h === "boutique" || SLUGS[h]) openView(h); else closeView();
+}
+addEventListener("hashchange", route);
+document.addEventListener("click", e => {
+  const a = e.target.closest('a[href^="#"]'); if (!a) return;
+  const id = a.getAttribute("href").slice(1);
+  if (id === "boutique" || SLUGS[id]) return;
+  if (id === "site") { if (a.hasAttribute("data-home") && view.hidden) { e.preventDefault(); lenis ? lenis.scrollTo(0) : scrollTo({ top: 0 }); } return; }
+  const el = document.getElementById(id);
+  if (el && view.hidden) { e.preventDefault(); lenis ? lenis.scrollTo(el) : el.scrollIntoView(); }
+});
 
 /* En-tête clair ou foncé selon la section dessous */
 (() => {
-  const top = $(".top"); const darks = $$(".night, .final"); const seen = new Map();
+  const top = $(".top"); const seen = new Map();
   if (!("IntersectionObserver" in window)) return;
   const io = new IntersectionObserver(es => {
     es.forEach(e => seen.set(e.target, e.isIntersecting));
     top.classList.toggle("on-dark", [...seen.values()].some(Boolean));
   }, { rootMargin: "-36px 0px -94% 0px" });
-  darks.forEach(d => io.observe(d));
+  $$(".night, .final").forEach(d => io.observe(d));
 })();
 
-/* Animations au défilement */
+/* Défilement fluide et animations */
 (() => {
-  if (!window.gsap || !window.ScrollTrigger) return;
-  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (!window.gsap || !window.ScrollTrigger || reduce) return;
   gsap.registerPlugin(ScrollTrigger);
   document.documentElement.classList.add("is-anim");
-
+  if (window.Lenis) {
+    lenis = new Lenis({ lerp: .085, smoothWheel: true });
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
   const prepRibbon = svg => $$(".rp", svg).map(p => { const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; return p; });
 
-  /* Arrivée */
   gsap.from(".hero-title .w", { yPercent: 115, duration: 1.3, ease: "expo.out", stagger: .09, delay: .1 });
   gsap.from(".bottle", { y: 80, autoAlpha: 0, duration: 1.5, ease: "expo.out", delay: .35 });
   gsap.from(".hero .meta, .hero .cta, .hero .eyebrow, .hero .scroll", { autoAlpha: 0, y: 14, duration: 1, ease: "power3.out", delay: .9, stagger: .07 });
 
-  /* 1. Le bouchon se soulève, le pinceau apparaît, le titre s'efface */
-  gsap.timeline({ scrollTrigger: { trigger: ".hero", start: "top top", end: "+=130%", scrub: 1, pin: true } })
-    .to(".bottle .cap", { y: () => -innerHeight * .3, ease: "none" }, 0)
+  gsap.timeline({ scrollTrigger: { trigger: ".hero", start: "top top", end: "+=140%", scrub: 1, pin: true } })
+    .to(".bottle .cap", { y: () => -innerHeight * .3, rotate: -4, ease: "none" }, 0)
     .to(".bottle .stem", { scaleY: 1, ease: "none" }, 0)
-    .to(".bottle .body", { y: () => innerHeight * .14, ease: "none" }, 0)
-    .to(".hero-title", { opacity: .2, ease: "none" }, 0)
+    .to(".bottle .body", { y: () => innerHeight * .15, ease: "none" }, 0)
+    .to(".bottle .shadow", { y: () => innerHeight * .15, ease: "none" }, 0)
+    .to(".hero-title", { opacity: .18, ease: "none" }, 0)
     .to(".hero .meta, .hero .cta, .hero .scroll, .hero .eyebrow", { autoAlpha: 0, ease: "none", duration: .4 }, 0);
 
-  /* 2. Le ruban de vernis traverse le titre */
   const r1 = prepRibbon($("#ribbon1"));
   gsap.from(".colors .big .w", { yPercent: 115, duration: 1.2, ease: "expo.out", stagger: .08, scrollTrigger: { trigger: ".colors", start: "top 70%" } });
-  gsap.timeline({ scrollTrigger: { trigger: ".colors", start: "top top", end: "+=110%", scrub: 1, pin: true } })
+  gsap.timeline({ scrollTrigger: { trigger: ".colors", start: "top top", end: "+=120%", scrub: 1, pin: true } })
     .to(r1, { strokeDashoffset: 0, ease: "none", duration: 1 }, 0)
     .from(".colors .swatches li", { y: 30, autoAlpha: 0, stagger: .08, duration: .4 }, .2);
 
-  /* 3. Nuit : ruban champagne, puis le cercle s'ouvre sur la photo */
   const r2 = prepRibbon($("#ribbon2"));
   gsap.from(".night .big .w", { yPercent: 115, duration: 1.2, ease: "expo.out", stagger: .08, scrollTrigger: { trigger: ".night", start: "top 70%" } });
   gsap.set(".night .cap-txt", { autoAlpha: 0, y: 20 });
-  gsap.timeline({ scrollTrigger: { trigger: ".night .stage", start: "top top", end: "+=220%", scrub: 1, pin: true } })
+  gsap.timeline({ scrollTrigger: { trigger: ".night .stage", start: "top top", end: "+=230%", scrub: 1, pin: true } })
     .to(r2, { strokeDashoffset: 0, ease: "none", duration: .45 }, 0)
     .to(".night .reveal", { clipPath: "circle(100% at 66% 58%)", ease: "power1.inOut", duration: .55 }, .38)
     .to(".night .big, #ribbon2", { opacity: .08, ease: "none", duration: .4 }, .45)
     .to(".night .cap-txt", { autoAlpha: 1, y: 0, duration: .15 }, .85);
 
-  /* 4. Bandeau photo en parallaxe */
-  gsap.fromTo(".band img", { yPercent: -10 }, { yPercent: 10, ease: "none", scrollTrigger: { trigger: ".band", start: "top bottom", end: "bottom top", scrub: true } });
+  gsap.fromTo(".box-bg", { yPercent: -6 }, { yPercent: 6, ease: "none", scrollTrigger: { trigger: ".box", start: "top bottom", end: "bottom top", scrub: true } });
+  gsap.from(".box-head .w", { yPercent: 115, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: ".box", start: "top 70%" } });
+  gsap.from(".box-head .glass", { y: 30, autoAlpha: 0, duration: 1, ease: "expo.out", scrollTrigger: { trigger: ".box", start: "top 65%" } });
+  gsap.from("#gcards-home .gcard", { y: 60, autoAlpha: 0, scale: .96, duration: 1.1, ease: "expo.out", stagger: .07, scrollTrigger: { trigger: "#gcards-home", start: "top 85%" } });
 
-  /* 5. La liste du coffret apparaît ligne par ligne */
-  gsap.from(".menu-head .w", { yPercent: 115, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: ".menu", start: "top 75%" } });
-  gsap.from(".menu-row", { y: 46, autoAlpha: 0, filter: "blur(10px)", duration: 1.1, ease: "expo.out", stagger: .09, scrollTrigger: { trigger: ".menu-list", start: "top 82%" } });
-
-  /* 6. Galerie horizontale */
   const track = $(".track");
   const dist = () => Math.max(0, track.scrollWidth - document.documentElement.clientWidth + 80);
   gsap.from(".sets-head .w", { yPercent: 115, duration: 1.2, ease: "expo.out", stagger: .08, scrollTrigger: { trigger: ".sets", start: "top 75%" } });
   gsap.to(track, { x: () => -dist(), ease: "none", scrollTrigger: { trigger: ".sets", start: "top top", end: () => "+=" + dist(), scrub: 1, pin: true, invalidateOnRefresh: true } });
 
-  /* 7. Final */
   gsap.from(".final .big .w", { yPercent: 115, duration: 1.3, ease: "expo.out", stagger: .1, scrollTrigger: { trigger: ".final", start: "top 70%" } });
   gsap.from(".final .rule", { scaleX: 0, duration: 1.6, ease: "expo.inOut", scrollTrigger: { trigger: ".final .rule", start: "top 90%" } });
   gsap.from(".final .ast", { rotate: -180, autoAlpha: 0, duration: 1.4, ease: "expo.out", scrollTrigger: { trigger: ".final .ast", start: "top 92%" } });
 
   addEventListener("load", () => ScrollTrigger.refresh());
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => ScrollTrigger.refresh());
 })();
+route();
 
-/* Réservations et inscriptions : visibles seulement par la propriétaire du site */
+/* Commandes et inscriptions : visibles seulement par la propriétaire du site */
 let db = null, uid = null;
 const ready = (async () => {
   try {
@@ -575,15 +925,15 @@ const ready = (async () => {
     uid = user ? await user.id() : null;
   } catch (e) { db = null; }
 })();
-async function saveLead({ email, prenom, kit, newsletter }) {
+async function saveLead({ email, prenom, panier, newsletter }) {
   await ready;
   if (!db || !uid) throw { code: "preview" };
   const ref = db.doc("leads/" + uid);
   const snap = await ref.get();
   const cur = snap.exists ? snap.data() : {};
-  const reservations = Array.isArray(cur.reservations) ? cur.reservations.slice() : [];
-  if (kit) reservations.push({ kit, le: new Date().toISOString() });
-  await ref.set({ email, prenom: prenom || cur.prenom || "", newsletter: !!newsletter || !!cur.newsletter, reservations, misAJour: new Date().toISOString() });
+  const commandes = Array.isArray(cur.commandes) ? cur.commandes.slice(-20) : [];
+  if (panier && panier.length) commandes.push({ articles: panier.map(l => ({ kit: l.id, quantite: l.q })), le: new Date().toISOString() });
+  await ref.set({ email, prenom: prenom || cur.prenom || "", newsletter: !!newsletter || !!cur.newsletter, commandes, misAJour: new Date().toISOString() });
 }
 function errText(err) {
   if (err && err.code === "preview") return "L'enregistrement n'est pas encore ouvert sur cette page. Revenez très bientôt.";
@@ -605,17 +955,19 @@ nl.addEventListener("submit", async e => {
 });
 
 const modal = $("#modal"), form = $("#r-form"), done = $("#r-done");
-let opener = null;
-function openModal(kit, from) {
-  opener = from || null; form.hidden = false; done.hidden = true; setStatus($("#r-status"), "");
-  const r = $("#kit-" + kit); if (r) r.checked = true;
-  modal.hidden = false; document.documentElement.style.overflow = "hidden";
+function openCheckout() {
+  if (!cart.length) { location.hash = "boutique"; return; }
+  form.hidden = false; done.hidden = true; setStatus($("#r-status"), "");
+  $("#summary").innerHTML = cart.map(l => `<div><span>${l.q} × ${esc(PRODUCTS[l.id].name)}</span><span>${esc(priceOf(l.id) === null ? "Prix à l'ouverture" : eur(priceOf(l.id) * l.q))}</span></div>`).join("");
+  modal.hidden = false; lock(true);
   setTimeout(() => $("#r-prenom").focus(), 30);
 }
-function closeModal() { modal.hidden = true; document.documentElement.style.overflow = ""; if (opener) opener.focus(); }
-$$("[data-open]").forEach(b => b.addEventListener("click", () => openModal(b.dataset.open, b)));
+function closeModal() { modal.hidden = true; if (view.hidden && drawer.getAttribute("aria-hidden") === "true") lock(false); }
 modal.addEventListener("click", e => { if (e.target.closest("[data-close]")) closeModal(); });
-document.addEventListener("keydown", e => { if (e.key === "Escape" && !modal.hidden) closeModal(); });
+document.addEventListener("keydown", e => {
+  if (e.key !== "Escape") return;
+  if (!modal.hidden) closeModal(); else if (drawer.classList.contains("open")) closeDrawer(); else if (!view.hidden) location.hash = "site";
+});
 
 form.addEventListener("submit", async e => {
   e.preventDefault();
@@ -623,14 +975,17 @@ form.addEventListener("submit", async e => {
   if (!prenom.value.trim()) { setStatus(st, "Indiquez votre prénom.", "err"); prenom.focus(); return; }
   if (!email.value.trim() || !email.checkValidity()) { setStatus(st, "Indiquez une adresse e-mail valide.", "err"); email.focus(); return; }
   if (!ok.checked) { setStatus(st, "Cochez la case d'accord pour que nous puissions vous recontacter.", "err"); ok.focus(); return; }
-  const kit = form.querySelector("input[name=kit]:checked").value;
   const btn = $("#r-submit"); btn.disabled = true; setStatus(st, "Enregistrement…");
   try {
-    await saveLead({ email: email.value.trim().toLowerCase(), prenom: prenom.value.trim(), kit, newsletter: $("#r-nl").checked });
-    const link = stripeLink(kit), pay = $("#d-pay");
+    const panier = cart.map(l => ({ ...l }));
+    await saveLead({ email: email.value.trim().toLowerCase(), prenom: prenom.value.trim(), panier, newsletter: $("#r-nl").checked });
+    const links = panier.filter(l => stripeLink(l.id));
     const who = prenom.value.trim();
-    if (link) { $("#d-text").textContent = who + ", votre réservation du " + KITS[kit] + " est enregistrée. Vous pouvez régler dès maintenant sur la page sécurisée Stripe."; pay.href = link; pay.hidden = false; }
-    else { $("#d-text").textContent = who + ", votre réservation du " + KITS[kit] + " est enregistrée. Nous vous écrivons à l'ouverture du paiement, avec la date de livraison."; pay.hidden = true; }
+    $("#d-text").textContent = links.length
+      ? who + ", votre commande est enregistrée. Réglez maintenant sur la page sécurisée Stripe, kit par kit."
+      : who + ", votre commande est enregistrée. Nous vous écrivons à l'ouverture du paiement, avec la date de livraison.";
+    $("#paylinks").innerHTML = links.map(l => `<a class="pill block" href="${esc(stripeLink(l.id))}" target="_blank" rel="noopener">Payer : ${esc(PRODUCTS[l.id].name)} × ${l.q} <span class="ar" aria-hidden="true">↗</span></a>`).join("");
+    cart = []; saveCart(); renderCart();
     form.reset(); form.hidden = true; done.hidden = false; $("#d-title").focus();
   } catch (err) { setStatus(st, errText(err), "err"); }
   finally { btn.disabled = false; }
